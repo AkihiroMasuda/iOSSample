@@ -116,6 +116,14 @@
     [request setUploadProgressHandler:^(float newProgress){
         NSLog(@"%g", newProgress);
     }];
+    // Response
+    [request setCompletionHandler:nil]; // setCompletionHandlerWithData をセットするなら、先にsetCompletionHandler にnilをセットする必要あり。多分、バグ。
+    [request setCompletionHandlerWithData:^(NSHTTPURLResponse *responseHeader, NSData *responseData){
+        NSLog(@"responseWithData ");
+        UIImage* im = [[UIImage alloc]initWithData:responseData];
+        _vi.image = im;
+    }];
+    
     [request startRequest];
     
     

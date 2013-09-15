@@ -1,22 +1,26 @@
 //
-//  MyAppDelegate.m
-//  test05_2_R9HTTPRequest
+//  R9AppDelegate.m
+//  R9HTTPRequest
 //
-//  Created by 舛田 明寛 on 2013/09/15.
-//  Copyright (c) 2013年 AkihiroMasuda. All rights reserved.
+//  Created by taisuke fujita on 12/03/02.
+//  Copyright (c) 2012年 Revolution 9. All rights reserved.
 //
 
-#import "MyAppDelegate.h"
-#import "R9HTTPRequest.h"
+#import "R9AppDelegate.h"
 
-@implementation MyAppDelegate
+@implementation R9AppDelegate
+
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
