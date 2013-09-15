@@ -49,25 +49,42 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="縮小画像サイズ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qR-1K-Rcb">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="32" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YPq-Zg-ZMr">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="sP0-lE-zgk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YPq-Zg-ZMr" secondAttribute="trailing" constant="76" id="47n-9B-pDW"/>
+                            <constraint firstItem="8Sh-ZI-iLK" firstAttribute="top" secondItem="5" secondAttribute="top" constant="74" id="ANa-e1-HNe"/>
+                            <constraint firstItem="8om-sL-MS8" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="172" id="AY4-BI-fDO"/>
                             <constraint firstItem="SGH-gN-uQt" firstAttribute="trailing" secondItem="5" secondAttribute="trailing" type="default" id="BOq-Ml-Bw6"/>
-                            <constraint firstItem="mxR-bH-Sm6" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="54" id="Lo2-JG-jfU"/>
-                            <constraint firstItem="8Sh-ZI-iLK" firstAttribute="top" secondItem="5" secondAttribute="top" constant="14" id="Ycl-A1-8Aj"/>
-                            <constraint firstAttribute="bottom" secondItem="8Sh-ZI-iLK" secondAttribute="bottom" constant="239" id="Zar-aN-f8K"/>
+                            <constraint firstItem="YPq-Zg-ZMr" firstAttribute="top" secondItem="5" secondAttribute="top" constant="16" id="JjD-52-t5i"/>
+                            <constraint firstAttribute="trailing" secondItem="6qR-1K-Rcb" secondAttribute="trailing" constant="195" id="P5N-Kn-fXP"/>
+                            <constraint firstAttribute="trailing" secondItem="8Sh-ZI-iLK" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="ToM-1h-ff5"/>
+                            <constraint firstAttribute="bottom" secondItem="8Sh-ZI-iLK" secondAttribute="bottom" constant="179" id="VId-bo-Taf"/>
+                            <constraint firstItem="mxR-bH-Sm6" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" type="default" id="W1I-Ix-5h0"/>
                             <constraint firstItem="SGH-gN-uQt" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="aoH-xh-v1Y"/>
-                            <constraint firstAttribute="bottom" secondItem="mxR-bH-Sm6" secondAttribute="bottom" constant="136" id="drK-zt-54b"/>
+                            <constraint firstItem="8om-sL-MS8" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" type="default" id="cfG-sE-fZS"/>
                             <constraint firstItem="SGH-gN-uQt" firstAttribute="leading" secondItem="5" secondAttribute="leading" type="default" id="mji-tW-8hV"/>
-                            <constraint firstItem="8Sh-ZI-iLK" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nAS-lh-6Po"/>
-                            <constraint firstAttribute="bottom" secondItem="8om-sL-MS8" secondAttribute="bottom" constant="131" id="p8o-y5-NQ4"/>
-                            <constraint firstAttribute="trailing" secondItem="8Sh-ZI-iLK" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="tjb-NY-cDX"/>
-                            <constraint firstItem="8om-sL-MS8" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="165" id="waT-AV-XVd"/>
+                            <constraint firstItem="mxR-bH-Sm6" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="31" id="ra8-ft-E72"/>
+                            <constraint firstItem="6qR-1K-Rcb" firstAttribute="baseline" secondItem="YPq-Zg-ZMr" secondAttribute="baseline" type="default" id="th4-Mu-duG"/>
+                            <constraint firstItem="8Sh-ZI-iLK" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="zBG-8H-HSt"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="sv" destination="8Sh-ZI-iLK" id="i4Z-vP-9Ob"/>
                         <outlet property="txtSearchImageNum" destination="8om-sL-MS8" id="tRV-yN-zo5"/>
+                        <outlet property="txtSrcSize" destination="YPq-Zg-ZMr" id="2kr-zA-VH7"/>
                         <outlet property="vi" destination="TwV-xT-1v6" id="Ug4-93-iI3"/>
                     </connections>
                 </viewController>
@@ -82,6 +99,7 @@
                 <relationship kind="action" name="onButton1Click:"/>
                 <relationship kind="outlet" name="sv" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="txtSearchImageNum" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtSrcSize" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="vi" candidateClass="UIImageView"/>
             </relationships>
         </class>

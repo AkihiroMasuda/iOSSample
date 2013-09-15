@@ -113,9 +113,9 @@
     [request setHTTPMethod:@"POST"];
     // パラメータ追加
     NSString* txtNumOfSampleImages = [_txtSearchImageNum text];
-//    txtNumOfSampleImages
-//    [request addBody:@"101" forKey:@"numOfSampleImages"];
     [request addBody:txtNumOfSampleImages forKey:@"numOfSampleImages"];
+    NSString* txtSrcLongSize = [_txtSrcSize text];
+    [request addBody:txtSrcLongSize forKey:@"srcLongSize"];
     [request addBody:@"192.168.1.3" forKey:@"workers"];
     NSData *pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(savedImage)];
     // set image data
