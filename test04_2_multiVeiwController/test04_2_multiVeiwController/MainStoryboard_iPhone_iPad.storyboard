@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="9mj-xO-dWq">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--My View Controller - タイトル-->
+        <scene sceneID="8q3-ek-QZY">
+            <objects>
+                <viewController id="DfK-AY-rWQ" customClass="MyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a2o-3Q-3Ok">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2i-R0-1TO">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AtR-cv-sQl" kind="push" id="MUz-35-F57"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I2i-R0-1TO" firstAttribute="top" secondItem="a2o-3Q-3Ok" secondAttribute="top" constant="219" id="its-0R-H3o"/>
+                            <constraint firstItem="I2i-R0-1TO" firstAttribute="leading" secondItem="a2o-3Q-3Ok" secondAttribute="leading" constant="133" id="w6D-tO-WL8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="タイトル" id="vF7-lX-Zdv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CQh-QO-kfq" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="628" y="326"/>
+        </scene>
+        <!--View Controller - タイトル２-->
+        <scene sceneID="cSG-jg-y45">
+            <objects>
+                <viewController id="AtR-cv-sQl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tC0-DN-a2h">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyv-23-qNf">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iyv-23-qNf" firstAttribute="leading" secondItem="tC0-DN-a2h" secondAttribute="leading" constant="52" id="EcK-Dy-Z2z"/>
+                            <constraint firstItem="iyv-23-qNf" firstAttribute="top" secondItem="tC0-DN-a2h" secondAttribute="top" constant="70" id="Ik0-hz-ZNS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="タイトル２" id="gzb-Rs-338"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IIN-7Q-J4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="1181"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KFH-Qz-qo2">
+            <objects>
+                <navigationController id="9mj-xO-dWq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1u5-eC-hph">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DfK-AY-rWQ" kind="relationship" relationship="rootViewController" id="Uhi-pa-EQm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="31h-tW-3Tw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="193" y="326"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="MyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
