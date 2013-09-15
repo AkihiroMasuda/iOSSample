@@ -89,12 +89,12 @@
 		C39A104517E55AF400E08EFD /* test04_3_multiViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C39A106B17E5687400E08EFD /* MyViewController02.h */,
-				C39A106C17E5687400E08EFD /* MyViewController02.m */,
 				C39A104E17E55AF400E08EFD /* MyAppDelegate.h */,
 				C39A104F17E55AF400E08EFD /* MyAppDelegate.m */,
 				C39A106317E55E6000E08EFD /* MyViewController01.h */,
 				C39A106417E55E6000E08EFD /* MyViewController01.m */,
+				C39A106B17E5687400E08EFD /* MyViewController02.h */,
+				C39A106C17E5687400E08EFD /* MyViewController02.m */,
 				C39A106017E55D0200E08EFD /* MyViewControllerFactory.h */,
 				C39A106117E55D0200E08EFD /* MyViewControllerFactory.m */,
 				C39A105E17E55C3D00E08EFD /* Storyboard.storyboard */,

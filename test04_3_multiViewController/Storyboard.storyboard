@@ -59,7 +59,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="C8Y-Hf-Q5P" firstAttribute="top" secondItem="jRh-7J-OK3" secondAttribute="top" constant="82" id="oud-55-7ob"/>
                             <constraint firstItem="C8Y-Hf-Q5P" firstAttribute="leading" secondItem="jRh-7J-OK3" secondAttribute="leading" constant="57" id="wTC-IK-i9E"/>
@@ -71,6 +71,23 @@
             <point key="canvasLocation" x="581" y="237"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MyViewController01" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyViewController01.h"/>
+            <relationships>
+                <relationship kind="action" name="onClick:"/>
+            </relationships>
+        </class>
+        <class className="MyViewController02" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyViewController02.h"/>
+            <relationships>
+                <relationship kind="action" name="onButtonClick:"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
