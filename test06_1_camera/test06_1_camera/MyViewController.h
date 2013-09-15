@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyViewController : UIViewController
-
+@interface MyViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+- (IBAction)openPhotoLibrary:(id)sender;
+@property IBOutlet UIImageView *iv;
 @end
