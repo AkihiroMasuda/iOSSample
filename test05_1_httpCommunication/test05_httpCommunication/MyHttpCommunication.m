@@ -46,26 +46,33 @@
 didReceiveResponse:(NSURLResponse *)response
 {
     [receivedData setLength:0];
-    resp(connection, response);
+    if (resp!=NULL){
+        resp(connection, response);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection
     didReceiveData:(NSData *)_data
 {
     [receivedData appendData:_data];
-    data(connection, _data);
+    if (data!=NULL){
+        data(connection, _data);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    err(connection, error);
+    if (err!=NULL){
+        err(connection, error);
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    fin(connection, receivedData);
+    if (fin!=NULL){
+        fin(connection, receivedData);
+    }
 }
-
 
 @end
