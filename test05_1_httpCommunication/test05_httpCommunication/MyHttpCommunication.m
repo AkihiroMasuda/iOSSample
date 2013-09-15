@@ -11,26 +11,53 @@
 @implementation MyHttpCommunication
 {
     id receivedData;
+    NSString* surl;
     connectionDidReceiveResponse resp;
     connectionDidReceiveData data;
     connectionDidReceiveError err;
     connectionDidFinishLoading fin;
 }
 
--(id)initWithResp:(connectionDidReceiveResponse)_resp
-    Data:(connectionDidReceiveData)_data
-    Error:(connectionDidReceiveError)_err
-    FinishLoading:(connectionDidFinishLoading)_fin
+-(id)initAndOpenUrl:(NSString*)_surl
+             Method:(MyHTTPRequestMethod)_method
+             Params:(NSString*)_params
+               Resp:(connectionDidReceiveResponse)_resp
+               Data:(connectionDidReceiveData)_data
+              Error:(connectionDidReceiveError)_err
+      FinishLoading:(connectionDidFinishLoading)_fin
 {
     self = [super init];
+    surl = _surl;
     resp = _resp;
     data = _data;
     err = _err;
     fin = _fin;
     
     // ここから追加
-    NSURL *theURL = [NSURL URLWithString:@"http://www.yahoo.co.jp/"];
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:theURL];
+    NSURL *theURL = [NSURL URLWithString:surl];
+    NSMutableURLRequest *theRequest;
+    switch (_method) {
+        case POST:{
+            theRequest = [NSMutableURLRequest requestWithURL:theURL];
+            [theRequest setHTTPMethod:@"POST"];
+            [theRequest setHTTPBody:[_params dataUsingEncoding:NSUTF8StringEncoding]];
+            break;
+        }
+        default:{
+            NSString *paramsAppendedUrlString;
+			if (_params != nil && [_params length] > 0) {
+				paramsAppendedUrlString = [NSString stringWithFormat:@"%@?%@", surl, _params];
+			}else{
+				paramsAppendedUrlString = surl;
+			}
+			theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:paramsAppendedUrlString]
+								   cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+//            [theRequest setHTTPMethod:@"GET"];
+            break;
+        }
+    }
+    
+    
     NSURLConnection *theConnection=[[NSURLConnection alloc]
                                     initWithRequest:theRequest delegate:self];
     if (theConnection) {

@@ -46,7 +46,13 @@
         NSLog(@"%@", [[NSString alloc]initWithData:receivedData
                                           encoding:NSUTF8StringEncoding]);
     };
-    com = [[MyHttpCommunication alloc] initWithResp:r Data:d Error:e FinishLoading:f];
+    com = [[MyHttpCommunication alloc]initAndOpenUrl:@"http://www.yahoo.co.jp/"
+                                              Method:POST
+                                              Params:NULL
+                                                Resp:r
+                                                Data:d
+                                               Error:e
+                                       FinishLoading:f];
     
     [self.window makeKeyAndVisible];
     return YES;
