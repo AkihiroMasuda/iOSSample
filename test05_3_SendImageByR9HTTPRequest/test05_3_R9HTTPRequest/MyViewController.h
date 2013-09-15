@@ -11,6 +11,7 @@
 @interface MyViewController : UIViewController <UIScrollViewDelegate>
 - (IBAction)onButton1Click:(id)sender;
 @property (weak, nonatomic) IBOutlet UIScrollView *sv;
+@property (weak, nonatomic) IBOutlet UITextField *txtSearchImageNum;
 
 @property (weak, nonatomic) IBOutlet UIImageView *vi;
 @end

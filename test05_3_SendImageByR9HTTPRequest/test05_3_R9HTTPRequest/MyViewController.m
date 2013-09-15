@@ -112,7 +112,10 @@
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     // パラメータ追加
-    [request addBody:@"101" forKey:@"numOfSampleImages"];
+    NSString* txtNumOfSampleImages = [_txtSearchImageNum text];
+//    txtNumOfSampleImages
+//    [request addBody:@"101" forKey:@"numOfSampleImages"];
+    [request addBody:txtNumOfSampleImages forKey:@"numOfSampleImages"];
     [request addBody:@"192.168.1.3" forKey:@"workers"];
     NSData *pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(savedImage)];
     // set image data
