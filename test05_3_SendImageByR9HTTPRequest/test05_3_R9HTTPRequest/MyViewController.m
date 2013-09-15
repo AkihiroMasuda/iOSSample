@@ -22,6 +22,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _sv.delegate         = self;
+    _sv.minimumZoomScale = 0.02;
+    _sv.maximumZoomScale = 4.0;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -29,6 +33,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return _vi;
 }
 
 - (IBAction)onButton1Click:(id)sender {

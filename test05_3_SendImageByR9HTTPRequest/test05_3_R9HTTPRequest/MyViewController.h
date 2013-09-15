@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyViewController : UIViewController
+@interface MyViewController : UIViewController <UIScrollViewDelegate>
 - (IBAction)onButton1Click:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *sv;
 
 @property (weak, nonatomic) IBOutlet UIImageView *vi;
 @end
