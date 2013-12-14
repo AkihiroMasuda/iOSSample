@@ -10,17 +10,16 @@
 		C3902973185C54F600E5AAB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3902972185C54F600E5AAB9 /* Foundation.framework */; };
 		C3902975185C54F600E5AAB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3902974185C54F600E5AAB9 /* CoreGraphics.framework */; };
 		C3902977185C54F600E5AAB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3902976185C54F600E5AAB9 /* UIKit.framework */; };
-		C390297D185C54F600E5AAB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C390297B185C54F600E5AAB9 /* InfoPlist.strings */; };
-		C390297F185C54F600E5AAB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C390297E185C54F600E5AAB9 /* main.m */; };
-		C3902983185C54F600E5AAB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3902982185C54F600E5AAB9 /* AppDelegate.m */; };
 		C3902985185C54F600E5AAB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3902984185C54F600E5AAB9 /* Images.xcassets */; };
 		C390298C185C54F600E5AAB9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C390298B185C54F600E5AAB9 /* XCTest.framework */; };
 		C390298D185C54F600E5AAB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3902972185C54F600E5AAB9 /* Foundation.framework */; };
 		C390298E185C54F600E5AAB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3902976185C54F600E5AAB9 /* UIKit.framework */; };
 		C3902996185C54F600E5AAB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3902994185C54F600E5AAB9 /* InfoPlist.strings */; };
 		C3902998185C54F600E5AAB9 /* test08_customViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3902997185C54F600E5AAB9 /* test08_customViewControllerTests.m */; };
-		C39029A3185C553500E5AAB9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39029A2185C553500E5AAB9 /* MainViewController.m */; };
 		C39029A6185C60EA00E5AAB9 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39029A5185C60EA00E5AAB9 /* PopupViewController.m */; };
+		C39029AC185C859A00E5AAB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C39029AB185C859A00E5AAB9 /* AppDelegate.m */; };
+		C39029AD185C864200E5AAB9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39029A2185C553500E5AAB9 /* MainViewController.m */; };
+		C39029AE185C86A700E5AAB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C390297E185C54F600E5AAB9 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +38,8 @@
 		C3902974185C54F600E5AAB9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C3902976185C54F600E5AAB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C390297A185C54F600E5AAB9 /* test08_customViewController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test08_customViewController-Info.plist"; sourceTree = "<group>"; };
-		C390297C185C54F600E5AAB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C390297E185C54F600E5AAB9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C3902980185C54F600E5AAB9 /* test08_customViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test08_customViewController-Prefix.pch"; sourceTree = "<group>"; };
-		C3902981185C54F600E5AAB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C3902982185C54F600E5AAB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C3902984185C54F600E5AAB9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C390298A185C54F600E5AAB9 /* test08_customViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test08_customViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C390298B185C54F600E5AAB9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,6 +50,8 @@
 		C39029A2185C553500E5AAB9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C39029A4185C60EA00E5AAB9 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupViewController.h; path = ../PopupViewController.h; sourceTree = "<group>"; };
 		C39029A5185C60EA00E5AAB9 /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupViewController.m; path = ../PopupViewController.m; sourceTree = "<group>"; };
+		C39029AA185C859A00E5AAB9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C39029AB185C859A00E5AAB9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +111,9 @@
 		C3902978185C54F600E5AAB9 /* test08_customViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C3902981185C54F600E5AAB9 /* AppDelegate.h */,
-				C3902982185C54F600E5AAB9 /* AppDelegate.m */,
+				C390297E185C54F600E5AAB9 /* main.m */,
+				C39029AA185C859A00E5AAB9 /* AppDelegate.h */,
+				C39029AB185C859A00E5AAB9 /* AppDelegate.m */,
 				C3902984185C54F600E5AAB9 /* Images.xcassets */,
 				C3902979185C54F600E5AAB9 /* Supporting Files */,
 				C39029A1185C553500E5AAB9 /* MainViewController.h */,
@@ -129,8 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				C390297A185C54F600E5AAB9 /* test08_customViewController-Info.plist */,
-				C390297B185C54F600E5AAB9 /* InfoPlist.strings */,
-				C390297E185C54F600E5AAB9 /* main.m */,
 				C3902980185C54F600E5AAB9 /* test08_customViewController-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -229,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C390297D185C54F600E5AAB9 /* InfoPlist.strings in Resources */,
 				C3902985185C54F600E5AAB9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,9 +245,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3902983185C54F600E5AAB9 /* AppDelegate.m in Sources */,
-				C39029A3185C553500E5AAB9 /* MainViewController.m in Sources */,
-				C390297F185C54F600E5AAB9 /* main.m in Sources */,
+				C39029AE185C86A700E5AAB9 /* main.m in Sources */,
+				C39029AD185C864200E5AAB9 /* MainViewController.m in Sources */,
+				C39029AC185C859A00E5AAB9 /* AppDelegate.m in Sources */,
 				C39029A6185C60EA00E5AAB9 /* PopupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,14 +271,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C390297B185C54F600E5AAB9 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C390297C185C54F600E5AAB9 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		C3902994185C54F600E5AAB9 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -455,6 +443,7 @@
 				C390299D185C54F600E5AAB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C390299E185C54F600E5AAB9 /* Build configuration list for PBXNativeTarget "test08_customViewControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +452,7 @@
 				C39029A0185C54F600E5AAB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
