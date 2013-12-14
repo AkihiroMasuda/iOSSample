@@ -10,4 +10,5 @@
 
 @interface RPDViewController : UIViewController
 
+- (IBAction)buttonClicked:(id)sender;
 @end

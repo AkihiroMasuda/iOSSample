@@ -41,8 +41,8 @@
 
 - (IBAction)onButton1Click:(id)sender {
     
-//    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypeCamera;  //カメラ使用
-    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary; //ライブラリから取得
+    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypeCamera;  //カメラ使用
+//    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary; //ライブラリから取得
     
     if([UIImagePickerController isSourceTypeAvailable:type]){
         UIImagePickerController* imagepicker = [UIImagePickerController new];

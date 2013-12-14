@@ -7,15 +7,35 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
+#import "PopupViewController.h"
+
+@interface AppDelegate()
+@property UIViewController *main;
+//@property (strong, nonatomic) UIWindow *window;
+//@property (strong, nonatomic) ViewController *viewController; // 追加
+@end
+
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // 空アプリを作ったら自動で作られるのここから
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    // 空アプリを作ったら自動で作られるのここまで
+    
+    // ViewController生成
+    _main = [[MainViewController alloc]init];
+//    _main = [[PopupViewController alloc] init];
+    
+    // rootViewControllerにセットするのがポイント
+    self.window.rootViewController = self.main;
+    
     return YES;
 }
 

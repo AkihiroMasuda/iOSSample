@@ -418,9 +418,11 @@
 		C309983017E5DB190017E63A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: AKIHIRO MASUDA (9J5TK9W6XG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Prefix.pch";
 				INFOPLIST_FILE = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = test05_3_SendImageByR9HTTPRequest;
 				WRAPPER_EXTENSION = app;
 			};
@@ -429,9 +431,11 @@
 		C309983117E5DB190017E63A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: AKIHIRO MASUDA (9J5TK9W6XG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Prefix.pch";
 				INFOPLIST_FILE = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = test05_3_SendImageByR9HTTPRequest;
 				WRAPPER_EXTENSION = app;
 			};

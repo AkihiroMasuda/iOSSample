@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'CUITest01' target in the 'CUITest01' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

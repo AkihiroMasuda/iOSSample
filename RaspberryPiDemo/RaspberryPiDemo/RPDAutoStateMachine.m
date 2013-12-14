@@ -9,8 +9,9 @@
 #import "RPDAutoStateMachine.h"
 #import "MBProgressHUD.h"
 #import "R9HTTPRequest.h"
-
+#import "RPDViewControllerImageViewer.h"
 #import "RPDDefine.h"
+#import "RPDSettings.h"
 
 
 @interface RPDAutoStateMachine ()
@@ -19,12 +20,14 @@
 @property int imgIndex;
 @property UIImageView* imgv1;
 @property UIImageView* imgv2;
+@property UIImage* img1;
 @property UIImage* img2;
 @property NSTimer* timer;
 @property MBProgressHUD* hud;
 @property BOOL isCanceledMosaicImageCreation;
 @property NSMutableArray *imgSamples;
-@property UIButton *btn;
+@property UIButton *btnPlayStop;
+@property UIButton *btnImageViewer;
 @property R9HTTPRequest *request;
 @end
 
@@ -44,7 +47,7 @@
         _vcAuto = vcAuto;
         _curStatus = STATUS_STOP;
         _imgIndex = 0;
-        _imgSamples = [NSArray arrayWithObjects:@"02.jpeg", @"03.jpeg", @"04.jpeg", @"01.jpeg", @"05.jpeg", nil];
+        _imgSamples = [NSArray arrayWithObjects:@"02.jpeg", @"03.jpeg", @"04.jpeg", @"01.jpeg", @"05.jpeg", @"06.jpeg", nil];
     }
     return self;
 }
@@ -61,7 +64,7 @@
     // 今の状態に対する処理
     switch(_curStatus) {
         case STATUS_STOP:
-            [self statusUnknown:event];
+            [self statusStop:event];
             break;
         case STATUS_INIT:
             [self statusInit:event];
@@ -76,8 +79,11 @@
     // 状態が変更されたときの処理
     if (oldStatus != _curStatus){
         switch(_curStatus) {
+            case STATUS_STOP:
+                [self statusStopEntry];
+                break;
             case STATUS_INIT:
-                [self statisInitEntry];
+                [self statusInitEntry];
                 break;
             case STATUS_DIST:
                 [self statusDistributionCalcEntry];
@@ -90,11 +96,12 @@
 }
 
 ///// 未初期化状態
-- (void) statisUnknownEntry
+- (void) statusStopEntry
 {
+    _btnImageViewer.enabled = YES;
 }
 
-- (void) statusUnknown:(int)event
+- (void) statusStop:(int)event
 {
     switch (event) {
         case EVENT_NEXT:
@@ -113,17 +120,19 @@
 
 
 ///// 初期状態
-- (void) statisInitEntry
+- (void) statusInitEntry
 {
     // 画面を初期化。(1枚目を表示。2枚目をクリア)
+    _img1 = nil;
     _img2 = nil;
     [self clearImageViews];
     [self addIndex];
     [self loadFirstImageView];
-
-    
+//    [_btnImageViewer setEnabled:false];
+    _btnImageViewer.enabled = NO;
     // タイマーを発行。一定時間後にEVENT_NEXTを発行
-    [self makeAndStartTimerForEventNext];
+    RPDSettings *st = [RPDSettings sharedManager];
+    [self makeAndStartTimerForEventNext:st.timerIntarval1];
 }
 
 - (void) statusInit:(int)event
@@ -156,7 +165,8 @@
         [self createMosaicImage];
     }else{
         // デバッグ用
-        [self makeAndStartTimerForEventNext];
+        RPDSettings *st = [RPDSettings sharedManager];
+        [self makeAndStartTimerForEventNext:st.timerIntarval1];
     }
 
 }
@@ -190,7 +200,8 @@
     [self loadSecondImageView];
     
     // タイマーを発行。一定時間後にEVENT_NEXTを発行
-    [self makeAndStartTimerForEventNext];
+    RPDSettings *st = [RPDSettings sharedManager];
+    [self makeAndStartTimerForEventNext:st.timerIntarval2];
 }
 - (void) statusFinished:(int)event
 {
@@ -214,11 +225,11 @@
 
 
 ////// 内部メソッド
-- (NSTimer*) makeAndStartTimerForEventNext
+- (NSTimer*) makeAndStartTimerForEventNext:(double)timerInterval
 {
     NSTimer *timer = [NSTimer
                       // タイマーイベントを発生させる感覚。「1.5」は 1.5秒 型は float
-                      scheduledTimerWithTimeInterval:TIMER_INTERVAL
+                      scheduledTimerWithTimeInterval:timerInterval
                       // 呼び出すメソッドの呼び出し先(selector) self はこのファイル(.m)
                       target:self
                       // 呼び出すメソッド名。「:」で自分自身(タイマーインスタンス)を渡す。
@@ -305,19 +316,28 @@
         
         CGSize frameSize = _vcAuto.view.frame.size;
         imgview1.frame = CGRectMake(0, HEADER_HEIGHT, frameSize.width, (frameSize.height-HEADER_HEIGHT-TABBAR_HEIGHT)/2);
+        imgview1.contentMode = UIViewContentModeScaleAspectFit; //アスペクト比を維持したまま 画像のすべてが表示されるようにリサイズ
         [_vcAuto.view addSubview:imgview1];
+        _img1 = imgview1.image;
         _imgv1 = imgview1;
     }
     // ボタンを追加
-    UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    _btn = btn;
-    [self setButtonCancel];
-//    [btn setTitle:@"キャンセル" forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0,HEADER_HEIGHT/4,120,30);
-    [btn addTarget:self action:@selector(buttonDidPush) forControlEvents:UIControlEventTouchUpInside];
-
-//    [_imgv1 addSubview:btn];
-    [_vcAuto.view addSubview:btn];
+    {
+        UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnPlayStop = btn;
+        [self setButtonCancel];
+        btn.frame = CGRectMake(0,HEADER_HEIGHT/4,BUTTON_WIDTH,BUTTON_HEIGHT);
+        [btn addTarget:self action:@selector(buttonDidPush) forControlEvents:UIControlEventTouchUpInside];
+        [_vcAuto.view addSubview:btn];
+    }
+    {
+        UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnImageViewer = btn;
+        [btn setTitle:@"ビューワーで見る" forState:UIControlStateNormal];
+        btn.frame = CGRectMake(BUTTON_WIDTH+PLAY_WIDTH,HEADER_HEIGHT/4,BUTTON_WIDTH,BUTTON_HEIGHT);
+        [btn addTarget:self action:@selector(showViewerButtonDidPush) forControlEvents:UIControlEventTouchUpInside];
+        [_vcAuto.view addSubview:btn];
+    }
 }
 
 -(void)buttonDidPush
@@ -326,14 +346,36 @@
     [self dispatchEvent:EVENT_BUTTON];
 }
 
+-(void)showViewerButtonDidPush
+{
+    // ビュー表示のボタン押下
+    if (_btnImageViewer.enabled==YES){ //なぜかわからんが、NOにしていても押せてしまったので。。
+        [self showModalView];
+    }
+}
+
 - (void)setButtonCancel
 {
-    [_btn setTitle:@"キャンセル" forState:UIControlStateNormal];
+    [_btnPlayStop setTitle:@"停止" forState:UIControlStateNormal];
 }
 
 - (void)setButtonStart
 {
-    [_btn setTitle:@"開始" forState:UIControlStateNormal];
+    [_btnPlayStop setTitle:@"開始" forState:UIControlStateNormal];
+}
+
+// モーダルビューを表示
+-(void)showModalView{
+    //    RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] init];
+    if (_img2 != nil){
+        RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] initWithImage:_img2];
+        [_vcAuto presentViewController:vcImageViewer animated:YES completion:nil];
+    }else if (_img1 != nil){
+        RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] initWithImage:_img1];
+        [_vcAuto presentViewController:vcImageViewer animated:YES completion:nil];
+    }else{
+        
+    }
 }
 
 
@@ -344,6 +386,7 @@
         UIImageView *imgview2 = [self createImageViewWithImage:_img2];
         CGSize frameSize = _vcAuto.view.frame.size;
         imgview2.frame = CGRectMake(0, (frameSize.height-HEADER_HEIGHT-TABBAR_HEIGHT)/2 + HEADER_HEIGHT, frameSize.width, (frameSize.height-HEADER_HEIGHT-TABBAR_HEIGHT)/2);
+        imgview2.contentMode = UIViewContentModeScaleAspectFit; //アスペクト比を維持したまま 画像のすべてが表示されるようにリサイズ
         [_vcAuto.view addSubview:imgview2];
         _imgv2 = imgview2;
     }
@@ -374,17 +417,20 @@
     
     // 画像をPOSTで送る
     // (テスト用のサーバにモザイク画作成サーバを使用）
+    RPDSettings *st = [RPDSettings sharedManager];
 //    NSURL *URL = [NSURL URLWithString:@"http://192.168.1.2:8080/posttest"];
-    NSURL *URL = [NSURL URLWithString:REQUEST_URL];
+    NSURL *URL = [NSURL URLWithString:st.requestURL];
 //    NSURL *URL = [NSURL URLWithString:@"http://192.168.43.215:8080/posttest"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     // パラメータ追加
-    NSString* txtNumOfSampleImages = NUM_OF_SAMPLE_IMAGES;
+    
+    NSString* txtNumOfSampleImages = st.numOfSampleImages;
     [request addBody:txtNumOfSampleImages forKey:@"numOfSampleImages"];
-    NSString* txtSrcLongSize = SRC_LONG_SIZE;
+    NSString* txtSrcLongSize = st.srcLongSize;
     [request addBody:txtSrcLongSize forKey:@"srcLongSize"];
-    [request addBody:WORKERS_IP forKey:@"workers"];
+    [request addBody:st.workersIP forKey:@"workers"];
+    [request addBody:st.ledEnable forKey:@"ledEnable"];
 //    [request addBody:@"192.168.1.2" forKey:@"workers"];
 //    [request addBody:@"192.168.43.215" forKey:@"workers"];
     NSData *pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(originalImage)];

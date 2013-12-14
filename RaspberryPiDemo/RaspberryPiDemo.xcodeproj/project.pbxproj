@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3132D13181EBBF10041C8C9 /* image_32.png in Resources */ = {isa = PBXBuildFile; fileRef = C3132D12181EBBF10041C8C9 /* image_32.png */; };
+		C3132D15181EBF4B0041C8C9 /* raspberrypi_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = C3132D14181EBF4B0041C8C9 /* raspberrypi_144x144.png */; };
+		C3132D1B182000530041C8C9 /* RPDViewControllerSetting2.m in Sources */ = {isa = PBXBuildFile; fileRef = C3132D19182000530041C8C9 /* RPDViewControllerSetting2.m */; };
+		C3132D1C182000530041C8C9 /* RPDViewControllerSetting2.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3132D1A182000530041C8C9 /* RPDViewControllerSetting2.xib */; };
+		C3132D1F1820031F0041C8C9 /* RPDSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C3132D1E1820031F0041C8C9 /* RPDSettings.m */; };
+		C3132D231824FAD20041C8C9 /* 03.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3132D221824FAD20041C8C9 /* 03.jpeg */; };
+		C3132D251824FCAB0041C8C9 /* 06.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3132D241824FCAB0041C8C9 /* 06.jpeg */; };
 		C3BE8F3F181CD1DF00EC196D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BE8F3E181CD1DF00EC196D /* Foundation.framework */; };
 		C3BE8F41181CD1DF00EC196D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BE8F40181CD1DF00EC196D /* CoreGraphics.framework */; };
 		C3BE8F43181CD1DF00EC196D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BE8F42181CD1DF00EC196D /* UIKit.framework */; };
@@ -22,7 +29,6 @@
 		C3BE8F72181CDFCE00EC196D /* RPDViewControllerCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE8F71181CDFCE00EC196D /* RPDViewControllerCamera.m */; };
 		C3BE8F75181CE09100EC196D /* RPDViewControllerAuto.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE8F74181CE09100EC196D /* RPDViewControllerAuto.m */; };
 		C3BE9B6D181D033300EC196D /* settings_32.png in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B6C181D033300EC196D /* settings_32.png */; };
-		C3BE9B70181D036500EC196D /* RPDViewControllerSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE9B6F181D036500EC196D /* RPDViewControllerSetting.m */; };
 		C3BE9B72181D04BC00EC196D /* refresh_32.png in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B71181D04BC00EC196D /* refresh_32.png */; };
 		C3BE9B92181DFBB700EC196D /* RPDAutoStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE9B91181DFBB700EC196D /* RPDAutoStateMachine.m */; };
 		C3BE9B95181E101D00EC196D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE9B94181E101D00EC196D /* MBProgressHUD.m */; };
@@ -30,9 +36,9 @@
 		C3BE9B9F181E52B700EC196D /* 01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B99181E52B700EC196D /* 01.jpeg */; };
 		C3BE9BA0181E52B700EC196D /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B9A181E52B700EC196D /* 01.png */; };
 		C3BE9BA1181E52B700EC196D /* 02.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B9B181E52B700EC196D /* 02.jpeg */; };
-		C3BE9BA2181E52B700EC196D /* 03.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B9C181E52B700EC196D /* 03.jpeg */; };
 		C3BE9BA3181E52B700EC196D /* 04.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B9D181E52B700EC196D /* 04.jpeg */; };
 		C3BE9BA4181E52B700EC196D /* 05.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3BE9B9E181E52B700EC196D /* 05.jpeg */; };
+		C3BE9BAE181E8BE000EC196D /* RPDViewControllerImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE9BAD181E8BE000EC196D /* RPDViewControllerImageViewer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C3132D12181EBBF10041C8C9 /* image_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_32.png; path = Resources/picol_prerelease_32_090119/image_32.png; sourceTree = "<group>"; };
+		C3132D14181EBF4B0041C8C9 /* raspberrypi_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = raspberrypi_144x144.png; path = Resources/raspberrypi_144x144.png; sourceTree = "<group>"; };
+		C3132D18182000530041C8C9 /* RPDViewControllerSetting2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDViewControllerSetting2.h; sourceTree = "<group>"; };
+		C3132D19182000530041C8C9 /* RPDViewControllerSetting2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDViewControllerSetting2.m; sourceTree = "<group>"; };
+		C3132D1A182000530041C8C9 /* RPDViewControllerSetting2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPDViewControllerSetting2.xib; sourceTree = "<group>"; };
+		C3132D1D1820031F0041C8C9 /* RPDSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDSettings.h; sourceTree = "<group>"; };
+		C3132D1E1820031F0041C8C9 /* RPDSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDSettings.m; sourceTree = "<group>"; };
+		C3132D221824FAD20041C8C9 /* 03.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 03.jpeg; path = Resources/03.jpeg; sourceTree = "<group>"; };
+		C3132D241824FCAB0041C8C9 /* 06.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 06.jpeg; path = Resources/06.jpeg; sourceTree = "<group>"; };
 		C3BE8F3B181CD1DF00EC196D /* RaspberryPiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaspberryPiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BE8F3E181CD1DF00EC196D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C3BE8F40181CD1DF00EC196D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -67,8 +82,6 @@
 		C3BE8F73181CE09100EC196D /* RPDViewControllerAuto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDViewControllerAuto.h; sourceTree = "<group>"; };
 		C3BE8F74181CE09100EC196D /* RPDViewControllerAuto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDViewControllerAuto.m; sourceTree = "<group>"; };
 		C3BE9B6C181D033300EC196D /* settings_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings_32.png; path = Resources/picol_prerelease_32_090119/settings_32.png; sourceTree = "<group>"; };
-		C3BE9B6E181D036500EC196D /* RPDViewControllerSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDViewControllerSetting.h; sourceTree = "<group>"; };
-		C3BE9B6F181D036500EC196D /* RPDViewControllerSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDViewControllerSetting.m; sourceTree = "<group>"; };
 		C3BE9B71181D04BC00EC196D /* refresh_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh_32.png; path = Resources/picol_prerelease_32_090119/refresh_32.png; sourceTree = "<group>"; };
 		C3BE9B8D181D474D00EC196D /* RPDViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDViewControllerBase.h; sourceTree = "<group>"; };
 		C3BE9B90181DFBB700EC196D /* RPDAutoStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDAutoStateMachine.h; sourceTree = "<group>"; };
@@ -80,10 +93,11 @@
 		C3BE9B99181E52B700EC196D /* 01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 01.jpeg; path = Resources/01.jpeg; sourceTree = "<group>"; };
 		C3BE9B9A181E52B700EC196D /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 01.png; path = Resources/01.png; sourceTree = "<group>"; };
 		C3BE9B9B181E52B700EC196D /* 02.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 02.jpeg; path = Resources/02.jpeg; sourceTree = "<group>"; };
-		C3BE9B9C181E52B700EC196D /* 03.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 03.jpeg; path = Resources/03.jpeg; sourceTree = "<group>"; };
 		C3BE9B9D181E52B700EC196D /* 04.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 04.jpeg; path = Resources/04.jpeg; sourceTree = "<group>"; };
 		C3BE9B9E181E52B700EC196D /* 05.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 05.jpeg; path = Resources/05.jpeg; sourceTree = "<group>"; };
 		C3BE9BA5181E731900EC196D /* RPDDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDDefine.h; sourceTree = "<group>"; };
+		C3BE9BAC181E8BE000EC196D /* RPDViewControllerImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDViewControllerImageViewer.h; sourceTree = "<group>"; };
+		C3BE9BAD181E8BE000EC196D /* RPDViewControllerImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDViewControllerImageViewer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,17 +164,22 @@
 				C3BE9B97181E2B3400EC196D /* R9HTTPRequest.m */,
 				C3BE9B94181E101D00EC196D /* MBProgressHUD.m */,
 				C3BE8F50181CD1DF00EC196D /* Images.xcassets */,
-				C3BE8F45181CD1DF00EC196D /* Supporting Files */,
 				C3BE8F70181CDFCE00EC196D /* RPDViewControllerCamera.h */,
 				C3BE8F71181CDFCE00EC196D /* RPDViewControllerCamera.m */,
 				C3BE8F73181CE09100EC196D /* RPDViewControllerAuto.h */,
 				C3BE8F74181CE09100EC196D /* RPDViewControllerAuto.m */,
-				C3BE9B6E181D036500EC196D /* RPDViewControllerSetting.h */,
-				C3BE9B6F181D036500EC196D /* RPDViewControllerSetting.m */,
 				C3BE9B8D181D474D00EC196D /* RPDViewControllerBase.h */,
 				C3BE9B90181DFBB700EC196D /* RPDAutoStateMachine.h */,
 				C3BE9B91181DFBB700EC196D /* RPDAutoStateMachine.m */,
 				C3BE9BA5181E731900EC196D /* RPDDefine.h */,
+				C3BE9BAC181E8BE000EC196D /* RPDViewControllerImageViewer.h */,
+				C3BE9BAD181E8BE000EC196D /* RPDViewControllerImageViewer.m */,
+				C3132D18182000530041C8C9 /* RPDViewControllerSetting2.h */,
+				C3132D19182000530041C8C9 /* RPDViewControllerSetting2.m */,
+				C3132D1A182000530041C8C9 /* RPDViewControllerSetting2.xib */,
+				C3132D1D1820031F0041C8C9 /* RPDSettings.h */,
+				C3132D1E1820031F0041C8C9 /* RPDSettings.m */,
+				C3BE8F45181CD1DF00EC196D /* Supporting Files */,
 			);
 			path = RaspberryPiDemo;
 			sourceTree = "<group>";
@@ -168,10 +187,13 @@
 		C3BE8F45181CD1DF00EC196D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C3132D241824FCAB0041C8C9 /* 06.jpeg */,
+				C3132D221824FAD20041C8C9 /* 03.jpeg */,
+				C3132D14181EBF4B0041C8C9 /* raspberrypi_144x144.png */,
+				C3132D12181EBBF10041C8C9 /* image_32.png */,
 				C3BE9B99181E52B700EC196D /* 01.jpeg */,
 				C3BE9B9A181E52B700EC196D /* 01.png */,
 				C3BE9B9B181E52B700EC196D /* 02.jpeg */,
-				C3BE9B9C181E52B700EC196D /* 03.jpeg */,
 				C3BE9B9D181E52B700EC196D /* 04.jpeg */,
 				C3BE9B9E181E52B700EC196D /* 05.jpeg */,
 				C3BE9B71181D04BC00EC196D /* refresh_32.png */,
@@ -281,15 +303,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3132D13181EBBF10041C8C9 /* image_32.png in Resources */,
 				C3BE9BA4181E52B700EC196D /* 05.jpeg in Resources */,
 				C3BE9BA0181E52B700EC196D /* 01.png in Resources */,
 				C3BE8F49181CD1DF00EC196D /* InfoPlist.strings in Resources */,
 				C3BE8F51181CD1DF00EC196D /* Images.xcassets in Resources */,
 				C3BE9BA1181E52B700EC196D /* 02.jpeg in Resources */,
+				C3132D15181EBF4B0041C8C9 /* raspberrypi_144x144.png in Resources */,
 				C3BE9B72181D04BC00EC196D /* refresh_32.png in Resources */,
 				C3BE9B9F181E52B700EC196D /* 01.jpeg in Resources */,
+				C3132D1C182000530041C8C9 /* RPDViewControllerSetting2.xib in Resources */,
+				C3132D231824FAD20041C8C9 /* 03.jpeg in Resources */,
+				C3132D251824FCAB0041C8C9 /* 06.jpeg in Resources */,
 				C3BE9BA3181E52B700EC196D /* 04.jpeg in Resources */,
-				C3BE9BA2181E52B700EC196D /* 03.jpeg in Resources */,
 				C3BE9B6D181D033300EC196D /* settings_32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,13 +336,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3BE8F4B181CD1DF00EC196D /* main.m in Sources */,
+				C3132D1B182000530041C8C9 /* RPDViewControllerSetting2.m in Sources */,
 				C3BE8F72181CDFCE00EC196D /* RPDViewControllerCamera.m in Sources */,
-				C3BE9B70181D036500EC196D /* RPDViewControllerSetting.m in Sources */,
 				C3BE9B92181DFBB700EC196D /* RPDAutoStateMachine.m in Sources */,
 				C3BE8F4F181CD1DF00EC196D /* RPDAppDelegate.m in Sources */,
 				C3BE8F75181CE09100EC196D /* RPDViewControllerAuto.m in Sources */,
+				C3BE9BAE181E8BE000EC196D /* RPDViewControllerImageViewer.m in Sources */,
 				C3BE9B98181E2B3400EC196D /* R9HTTPRequest.m in Sources */,
 				C3BE9B95181E101D00EC196D /* MBProgressHUD.m in Sources */,
+				C3132D1F1820031F0041C8C9 /* RPDSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +464,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: AKIHIRO MASUDA (9J5TK9W6XG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -453,7 +480,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: AKIHIRO MASUDA (9J5TK9W6XG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

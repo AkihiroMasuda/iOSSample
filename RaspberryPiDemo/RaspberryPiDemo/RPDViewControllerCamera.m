@@ -9,8 +9,9 @@
 #import "RPDViewControllerCamera.h"
 #import "R9HTTPRequest.h"
 #import "MBProgressHUD.h"
+#import "RPDViewControllerImageViewer.h"
 #import "RPDDefine.h"
-
+#import "RPDSettings.h"
 
 @interface RPDViewControllerCamera ()
 @property UIButton *btnSend;
@@ -52,12 +53,13 @@
     [super viewDidLoad];
     
     // ボタンを追加
-    const int BUTTON_WIDTH = 120;
+//    const int BUTTON_WIDTH = 140;
+//    const int PLAY_WIDTH = 10;
     {
         UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
         _btnSend = btn;
         [_btnSend setTitle:@"送信" forState:UIControlStateNormal];
-        _btnSend.frame = CGRectMake(0,HEADER_HEIGHT/4,BUTTON_WIDTH,30);
+        _btnSend.frame = CGRectMake(0,HEADER_HEIGHT/4,BUTTON_WIDTH,BUTTON_HEIGHT);
         [btn addTarget:self action:@selector(sendButtonDidPush) forControlEvents:UIControlEventTouchUpInside];
         //    [_imgv1 addSubview:btn];
         [self.view addSubview:btn];
@@ -66,13 +68,21 @@
         UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
         _btnCamera = btn;
         [_btnCamera setTitle:@"カメラ" forState:UIControlStateNormal];
-        _btnCamera.frame = CGRectMake(BUTTON_WIDTH + 20,HEADER_HEIGHT/4,BUTTON_WIDTH,30);
+        _btnCamera.frame = CGRectMake(BUTTON_WIDTH + PLAY_WIDTH,HEADER_HEIGHT/4,BUTTON_WIDTH,BUTTON_HEIGHT);
         [btn addTarget:self action:@selector(cameraButtonDidPush) forControlEvents:UIControlEventTouchUpInside];
         //    [_imgv1 addSubview:btn];
         [self.view addSubview:btn];
     }
-    _img1 = nil;
-    
+    {
+        UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [btn setTitle:@"ビューワーで見る" forState:UIControlStateNormal];
+        btn.frame = CGRectMake((BUTTON_WIDTH+PLAY_WIDTH)*2,HEADER_HEIGHT/4,BUTTON_WIDTH,BUTTON_HEIGHT);
+        [btn addTarget:self action:@selector(showViewerButtonDidPush) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+    }
+//    _img1 = nil;
+    _img1 = [UIImage imageNamed:@"03.jpeg"];
+    [self loadFirstImageView];
 }
 
 - (UIImageView *)createImageViewWithName:(NSString*)name
@@ -115,6 +125,13 @@
     // カメラボタン押下
     [self callCameraView];
 }
+
+-(void)showViewerButtonDidPush
+{
+    // 画像ビューワー表示ボタン押下
+    [self showModalView];
+}
+
 
 - (void) callCameraView
 {
@@ -169,6 +186,8 @@
 {
     UIImage* originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage* editedImage = (UIImage*)[info objectForKey:UIImagePickerControllerEditedImage];
+    
+    [self resetImages];
     
 //    _img1 = originalImage;
     _img1 = editedImage;
@@ -238,16 +257,19 @@
     
     // 画像をPOSTで送る
     // (テスト用のサーバにモザイク画作成サーバを使用）
-    NSURL *URL = [NSURL URLWithString:REQUEST_URL];
+    RPDSettings *st = [RPDSettings sharedManager];
+    NSURL *URL = [NSURL URLWithString:st.requestURL];
     //    NSURL *URL = [NSURL URLWithString:@"http://192.168.43.215:8080/posttest"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     // パラメータ追加
-    NSString* txtNumOfSampleImages = NUM_OF_SAMPLE_IMAGES;
+    NSString* txtNumOfSampleImages = st.numOfSampleImages;
     [request addBody:txtNumOfSampleImages forKey:@"numOfSampleImages"];
-    NSString* txtSrcLongSize = SRC_LONG_SIZE;
+    NSString* txtSrcLongSize = st.srcLongSize;
     [request addBody:txtSrcLongSize forKey:@"srcLongSize"];
-    [request addBody:WORKERS_IP forKey:@"workers"];
+    [request addBody:st.workersIP forKey:@"workers"];
+    [request addBody:st.ledEnable forKey:@"ledEnable"];
+    
     //    [request addBody:@"192.168.43.215" forKey:@"workers"];
     NSData *pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(originalImage)];
     // set image data
@@ -306,6 +328,31 @@
     if (_hud!=nil){
         [_hud hide:true];
         _hud = nil;
+    }
+}
+
+- (void) resetImages
+{
+    if (_imgv1!=nil) [_imgv1 removeFromSuperview];
+    if (_imgv2!=nil) [_imgv2 removeFromSuperview];
+    _imgv1 = nil;
+    _imgv2 = nil;
+    _img1 = nil;
+    _img2 = nil;
+    
+}
+
+// モーダルビューを表示
+-(void)showModalView{
+//    RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] init];
+    if (_img2 != nil){
+        RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] initWithImage:_img2];
+        [self presentViewController:vcImageViewer animated:YES completion:nil];
+    }else if (_img1 != nil){
+        RPDViewControllerImageViewer *vcImageViewer = [[RPDViewControllerImageViewer alloc] initWithImage:_img1];
+        [self presentViewController:vcImageViewer animated:YES completion:nil];
+    }else{
+        
     }
 }
 
