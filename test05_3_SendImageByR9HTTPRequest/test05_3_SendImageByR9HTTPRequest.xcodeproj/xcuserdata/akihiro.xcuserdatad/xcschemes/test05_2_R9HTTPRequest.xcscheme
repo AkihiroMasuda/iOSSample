@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C309980817E5DB180017E63A"
-               BuildableName = "test05_2_R9HTTPRequest.app"
+               BuildableName = "test05_3_SendImageByR9HTTPRequest.app"
                BlueprintName = "test05_3_SendImageByR9HTTPRequest"
                ReferencedContainer = "container:test05_3_SendImageByR9HTTPRequest.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C309980817E5DB180017E63A"
-            BuildableName = "test05_2_R9HTTPRequest.app"
+            BuildableName = "test05_3_SendImageByR9HTTPRequest.app"
             BlueprintName = "test05_3_SendImageByR9HTTPRequest"
             ReferencedContainer = "container:test05_3_SendImageByR9HTTPRequest.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C309980817E5DB180017E63A"
-            BuildableName = "test05_2_R9HTTPRequest.app"
+            BuildableName = "test05_3_SendImageByR9HTTPRequest.app"
             BlueprintName = "test05_3_SendImageByR9HTTPRequest"
             ReferencedContainer = "container:test05_3_SendImageByR9HTTPRequest.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C309980817E5DB180017E63A"
-            BuildableName = "test05_2_R9HTTPRequest.app"
+            BuildableName = "test05_3_SendImageByR9HTTPRequest.app"
             BlueprintName = "test05_3_SendImageByR9HTTPRequest"
             ReferencedContainer = "container:test05_3_SendImageByR9HTTPRequest.xcodeproj">
          </BuildableReference>

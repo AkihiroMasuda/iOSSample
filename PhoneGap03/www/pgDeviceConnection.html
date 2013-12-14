@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova </title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" src="cordova-2.6.0.js"></script>
+<!--
+<script src="http://192.168.1.253:8080/target/target-script-min.js#hogehoge"></script>
+-->
+<script type="text/javascript" charset="utf-8" >
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var str =   'Device Name: '     + device.name     + '<br />' +   //device.name は存在しないプロパティ？(printProperties()では出てこない）
+                    'Device Cordova: '  + device.cordova  + '<br />' +
+                    'Device Platform: ' + device.platform + '<br />' +
+                    'Device UUID: '     + device.uuid     + '<br />' +
+                    'Device Model: '     + device.model     + '<br />' + //device.model は実機だと出てくるがRippleだと出ない
+                    'Device Version: '  + device.version  + '<br />' +
+                    '<br/>' + 
+                    'Connection : '  + getConnection()  + '<br />';
+            ;
+        $('#val').html(str);
+    }
+    
+    function getConnection() {
+            var networkState = navigator.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown';
+            states[Connection.ETHERNET] = 'Ethernet';
+            states[Connection.WIFI]     = 'WiFi';
+            states[Connection.CELL_2G]  = 'Cell 2G';
+            states[Connection.CELL_3G]  = 'Cell 3G';
+            states[Connection.CELL_4G]  = 'Cell 4G';
+            states[Connection.CELL]     = 'Cell generic';
+            states[Connection.NONE]     = 'No network';
+
+        return states[networkState];
+    }
+    
+    function printProperties(obj) {
+        var properties = '';
+        for (var prop in obj){
+            properties += prop + "=" + obj[prop] + "\n";
+        }
+        alert(properties);
+    }    
+    
+</script>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>Device / Connection</h1>
+            <a href="" data-rel="back">Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+        </div>
+        <div data-role="content">
+            <h3 id="val"></h3>
+        </div>
+        <div data-role="footer">
+            <h4>Copyright 2013</h4>
+        </div>
+    </div>
+</body>
+</html>

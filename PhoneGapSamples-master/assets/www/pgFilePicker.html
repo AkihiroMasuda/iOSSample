@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova </title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/cordova.js"></script>
+<!--
+<script src="http://192.168.1.253:8080/target/target-script-min.js#hogehoge"></script>
+-->
+<script type="text/javascript" charset="utf-8" >
+    
+
+    var curParentEntry = null;
+    var curEntries;
+    var curFileEntry = null;
+    var media = null;
+    
+    // Wait for device API libraries to load
+    //
+    $(function() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+        $("#home").bind("pageinit", function() {
+            initMedia();
+        });
+        // 次ページ表示次のイベント
+        $("#filepicker").bind("pageinit", function() {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+        });
+    });
+    
+    function initMedia(){
+        if (curFileEntry != null){
+//            alert(curFileEntry.fullPath);
+            media = new Media(curFileEntry.fullPath,
+                              function (){
+                                    alert("success");
+                                },
+                              function (error){
+                                    alert('code: '    + error.code    + '\n' +
+                                          'message: ' + error.message + '\n');
+                              }
+                             );
+            media.play();         
+            var mediaTimer = setInterval(function() {
+                // get my_media position
+                media.getCurrentPosition(
+                    // success callback
+                    function(position) {
+                        $('#info').text( "pos/dur  =  " + position + " / " + media.getDuration());
+                    },
+                    // error callback
+                    function(e) {
+                        console.log("Error getting pos=" + e);
+                    }
+                );
+            }, 1000);
+            
+        }
+    }
+    
+    // device APIs are available
+    //
+    function onDeviceReady() {
+    }
+
+    function onFileSystemSuccess(fileSystem) {
+        console.log(fileSystem.name);
+        console.log(fileSystem.root.name);
+        updateFullPath(fileSystem.root);
+        // Get a list of all the entries in the directory
+        getChildren(fileSystem.root);
+    }
+    
+    function getChildren(dirEntry){
+        if (dirEntry.isDirectory){
+            dirEntry.getParent(
+                function (p){
+                    // Parent取得成功時
+                    curParentEntry = p; // Parentを保存
+                    var dirReader = dirEntry.createReader(); 
+                    dirReader.readEntries(successReadEntries,fail);
+                },
+                fail
+            );
+        }
+    }
+
+    // Entries取得成功時
+    function successReadEntries(entries) {
+        var i;
+        $('#list').html("");
+        //親へのリンク作成
+        var strEle = "<li><a href='' data-ajax='false'>"+ ".." +"</a></li>";
+        $(strEle).appendTo($('#list'));
+        //子のリスト作成
+        for (i=0; i<entries.length; i++) {
+            console.log(entries[i].name);
+            var strEle = "<li><a href='' data-ajax='false'>"+ entries[i].name +"</a></li>";
+            $(strEle).appendTo($('#list'));
+        }
+        //リスト更新命令
+        $('#list').listview('refresh');
+        //リスト要素クリック時処理
+        $('li').click(function() {
+            var ind = $('li').index(this);
+            if (ind == 0){
+                // Parent
+                updateFullPath(curParentEntry);
+                getChildren(curParentEntry);
+            }else if (ind > 0){
+                // Children
+                var e = curEntries[ind-1];
+                if (e.isDirectory){
+                    updateFullPath(e);
+                    getChildren(e);
+                }else{
+                    //ファイルの場合
+                    curFileEntry = e;
+                    if (curFileEntry != null){
+                        $('#curFile').text(curFileEntry.fullPath);
+                    }else{
+                        $('#curFile').text("null");
+                    }
+                    initMedia();
+                    $.mobile.back();
+                }
+            }else{
+                //No children or error
+            }
+        });
+        // Entries保存
+        curEntries = entries;
+    }
+
+    // 現在のディレクトリのフルパスを表示
+    function updateFullPath(dirEntry){
+        $('#fullpath').text(dirEntry.fullPath);
+    }
+    
+    // エラーハンドラ
+    function fail(evt) {
+        console.log(evt.target.error.code);
+        alert(evt.target.error.code);
+    }    
+
+</script>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>Compass</h1>
+            <a href="" data-rel="back">Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+        </div>
+        <div data-role="content">
+            <a href="#filepicker" data-role="button">Get File</a>
+            <h1 id="curFile"></h1>
+            <h5 id="info">info : null</h5>
+        </div>
+        <div data-role="footer">
+            <h4>Copyright 2013</h4>
+        </div>
+    </div>
+    
+    <!--FilePicker  -->    
+    <div data-role="page" id="filepicker" >
+        <div data-role="header" >
+            <h1>File Picker</h1>
+            <a href="" data-rel="back">Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+        </div>
+        <div data-role="content">
+            <h3 id="fullpath"></h3>
+            <ul data-role="listview" id="list"></ul>
+        </div>
+        <div data-role="footer">
+            <h4>Copyright 2013</h4>
+        </div>
+    </div>
+    
+</body>
+</html>

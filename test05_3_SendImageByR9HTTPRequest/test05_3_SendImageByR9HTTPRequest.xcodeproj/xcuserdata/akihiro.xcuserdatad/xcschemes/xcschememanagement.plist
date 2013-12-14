@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Distribution.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>test05_03_SendImageByR9HTTPRequest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>test05_2_R9HTTPRequest.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +23,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>C309980817E5DB180017E63A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C3FB4A0A18140E560028B79E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

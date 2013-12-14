@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+    <html>
+      <head>
+        <title>Media Example</title>
+
+        <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+//            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+//            var surl = getPath() + "jon.mp3";
+            var surl = "file:///storage/sdcard0/temp/tsukushinbo_01.mp3";
+            alert(surl);
+//            var surl = "http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3";
+            playAudio(surl);
+        }
+
+        // Audio player
+        //
+        var my_media = null;
+        var mediaTimer = null;
+            
+        function printProperties(obj) {
+            var properties = '';
+            for (var prop in obj){
+                properties += prop + "=" + obj[prop] + "\n";
+            }
+            alert(properties);
+        }    
+            
+
+//Androidではプロジェクト中にあるmp3ファイルを読み込ませるために絶対パスを指定します。そのための関数です。
+        function getPath() {
+            var str = location.pathname;
+            var i = str.lastIndexOf('/');
+            return str.substring(0,i+1);
+        }
+                    
+            
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create Media object from src
+            my_media = new Media(src, onSuccess, onError);
+
+            alert(my_media);
+            // Play audio
+            my_media.play();
+            alert("hoge22");
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                alert("hoge2");
+                alert(my_media.getDuration());
+//                mediaTimer = setInterval(function() {
+//                    // get my_media position
+//                    my_media.getCurrentPosition(
+//                        // success callback
+//                        function(position) {
+//                            if (position > -1) {
+//                                setAudioPosition((position) + " sec");
+//                            }
+//                        },
+//                        // error callback
+//                        function(e) {
+//                            console.log("Error getting pos=" + e);
+//                            setAudioPosition("Error: " + e);
+//                        }
+//                    );
+//                }, 1000);
+            }
+            alert("hoge9");
+            
+        }
+
+        // Pause audio
+        //
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
+
+        // Stop audio
+        //
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            alert("hogehoge");
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback
+        //
+        function onError(error) {
+            printProperties(error);
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        //
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+        function onload(){
+            // Wait for device API libraries to load
+            //
+            document.addEventListener("deviceready", onDeviceReady, false);
+            alert("onl");
+        }
+            
+        </script>
+      </head>
+      <body onload="onload()">
+<!--
+        <a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');">Play Audio</a>
+        <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+        <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+-->
+        <p id="audio_position"></p>
+      </body>
+    </html>

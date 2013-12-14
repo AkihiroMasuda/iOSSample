@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+
+<body>
+<div id="main">Preparing my device.. </div>
+<script type="text/javascript" src="js/cordova.js"></script>
+<script>
+    
+document.addEventListener("deviceready", init, false);
+function init(){
+	document.querySelector("#main").innerHTML = "Ready";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cordova </title>
+<!--
+<script src="http://192.168.1.253:8080/target/target-script-min.js#hogehoge"></script>
+-->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script type="text/javascript" charset="utf-8"src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" charset="utf-8"src="js/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<script type="text/javascript">
+</script>
+<body onLoad="onLoad()">
+    
+<!--トップメニュー-->
+<div data-role="page" id="home">
+    <div data-role="header">
+        <h1>Home</h1>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview">
+            <li><a href="#phonegapsamples" data-ajax="false">PhoneGap API Samples</a></li>            
+            <li><a href="#jqmsamples" data-ajax="false">jQuery Mobile Samples</a></li>            
+        </ul>
+    </div>
+    <div data-role="footer">
+        <h4>Copyright 2013</h4>
+    </div>
+</div>
+    
+<!--PhoneGap メニュー-->
+<div data-role="page" id="phonegapsamples" data-add-back-btn="true">
+    <div data-role="header">
+        <h1>PhoneGap API Samples</h1>
+        <a href="" data-rel="back">Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+    </div>
+    <div data-role="content">
+        <ul data-role="listview">
+            <li><a href="pgAccelerometer.html" data-ajax="false">Accelerometer</a></li>
+            <li><a href="pgCompass.html" data-ajax="false">Compass</a></li>
+            <li><a href="pgDeviceConnection.html" data-ajax="false">Device / Connection</a></li>
+            <li><a href="pgFile.html" data-ajax="false">File</a></li>
+            <li><a href="pgFilePicker.html" data-ajax="false">Media (File Picker Test)</a></li>
+            <li><a href="pgReady.html" data-ajax="false">PhoneGap ready check</a></li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <h4>Copyright 2013</h4>
+    </div>
+</div>
+    
+<!--jQueryMobile メニュー-->
+<div data-role="page" id="jqmsamples" data-add-back-btn="true">
+    <div data-role="header">
+        <h1>jQuery Mobile Samples</h1>
+        <a href="" data-rel="back" >Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+    </div>
+    <div data-role="content">
+        <ul data-role="listview">
+            <li><a href="jqmBasic.html" data-ajax="false">Basic</a></li>
+            <li><a href="jqmButton.html" data-ajax="false">Button</a></li>
+            <li><a href="jqmList.html" data-ajax="false">List</a></li>
+            <li><a href="jqmText.html" data-ajax="false">Text</a></li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <h4>Copyright 2013</h4>
+    </div>
+</div>
+    
+    
+</body>
+</html>

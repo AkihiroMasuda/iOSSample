@@ -27,6 +27,26 @@
 		C309986617E5E3D30017E63A /* MyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C309985A17E5E3D30017E63A /* MyAppDelegate.m */; };
 		C309986717E5E3D30017E63A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C309985C17E5E3D30017E63A /* MyViewController.m */; };
 		C309986817E5E3D30017E63A /* test05_3_SendImageByR9HTTPRequest-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C309985D17E5E3D30017E63A /* test05_3_SendImageByR9HTTPRequest-Info.plist */; };
+		C3FB4A0C18140E560028B79E /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C309983717E5DD830017E63A /* NSData+Base64.m */; };
+		C3FB4A0D18140E560028B79E /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = C309983917E5DD830017E63A /* NSData+Crypto.m */; };
+		C3FB4A0E18140E560028B79E /* NSString+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = C309983B17E5DD830017E63A /* NSString+Crypto.m */; };
+		C3FB4A0F18140E560028B79E /* R9HTTPWSSERequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C309983D17E5DD830017E63A /* R9HTTPWSSERequest.m */; };
+		C3FB4A1018140E560028B79E /* R9AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C309984017E5DD830017E63A /* R9AppDelegate.m */; };
+		C3FB4A1118140E560028B79E /* R9HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C309984417E5DD830017E63A /* R9HTTPRequest.m */; };
+		C3FB4A1218140E560028B79E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C309985817E5E3D30017E63A /* main.m */; };
+		C3FB4A1318140E560028B79E /* MyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C309985A17E5E3D30017E63A /* MyAppDelegate.m */; };
+		C3FB4A1418140E560028B79E /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C309985C17E5E3D30017E63A /* MyViewController.m */; };
+		C3FB4A1618140E560028B79E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309980C17E5DB180017E63A /* UIKit.framework */; };
+		C3FB4A1718140E560028B79E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309980E17E5DB180017E63A /* Foundation.framework */; };
+		C3FB4A1818140E560028B79E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309981017E5DB180017E63A /* CoreGraphics.framework */; };
+		C3FB4A1A18140E560028B79E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C309983317E5DD830017E63A /* InfoPlist.strings */; };
+		C3FB4A1B18140E560028B79E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C309984F17E5E3D30017E63A /* Default-568h@2x.png */; };
+		C3FB4A1C18140E560028B79E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C309985017E5E3D30017E63A /* Default.png */; };
+		C3FB4A1D18140E560028B79E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C309985117E5E3D30017E63A /* Default@2x.png */; };
+		C3FB4A1E18140E560028B79E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C309985217E5E3D30017E63A /* InfoPlist.strings */; };
+		C3FB4A1F18140E560028B79E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C309985417E5E3D30017E63A /* MainStoryboard_iPad.storyboard */; };
+		C3FB4A2018140E560028B79E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C309985617E5E3D30017E63A /* MainStoryboard_iPhone.storyboard */; };
+		C3FB4A2118140E560028B79E /* test05_3_SendImageByR9HTTPRequest-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C309985D17E5E3D30017E63A /* test05_3_SendImageByR9HTTPRequest-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +81,8 @@
 		C309985C17E5E3D30017E63A /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		C309985D17E5E3D30017E63A /* test05_3_SendImageByR9HTTPRequest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "test05_3_SendImageByR9HTTPRequest-Info.plist"; sourceTree = "<group>"; };
 		C309985E17E5E3D30017E63A /* test05_3_SendImageByR9HTTPRequest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test05_3_SendImageByR9HTTPRequest-Prefix.pch"; sourceTree = "<group>"; };
+		C3FB4A2518140E560028B79E /* test05_3_SendImageByR9HTTPRequest copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test05_3_SendImageByR9HTTPRequest copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3FB4A2618140E560028B79E /* test05_3_SendImageByR9HTTPRequest copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "test05_3_SendImageByR9HTTPRequest copy-Info.plist"; path = "/Users/akihiro/myroot/programming/xcode/test05_3_SendImageByR9HTTPRequest/test05_3_SendImageByR9HTTPRequest copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +96,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3FB4A1518140E560028B79E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3FB4A1618140E560028B79E /* UIKit.framework in Frameworks */,
+				C3FB4A1718140E560028B79E /* Foundation.framework in Frameworks */,
+				C3FB4A1818140E560028B79E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +116,7 @@
 				C309983217E5DD830017E63A /* R9HTTPRequest */,
 				C309980B17E5DB180017E63A /* Frameworks */,
 				C309980A17E5DB180017E63A /* Products */,
+				C3FB4A2618140E560028B79E /* test05_3_SendImageByR9HTTPRequest copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C309980917E5DB180017E63A /* test05_3_SendImageByR9HTTPRequest.app */,
+				C3FB4A2518140E560028B79E /* test05_3_SendImageByR9HTTPRequest copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +208,23 @@
 			productReference = C309980917E5DB180017E63A /* test05_3_SendImageByR9HTTPRequest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C3FB4A0A18140E560028B79E /* Distribution */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3FB4A2218140E560028B79E /* Build configuration list for PBXNativeTarget "Distribution" */;
+			buildPhases = (
+				C3FB4A0B18140E560028B79E /* Sources */,
+				C3FB4A1518140E560028B79E /* Frameworks */,
+				C3FB4A1918140E560028B79E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Distribution;
+			productName = test05_2_R9HTTPRequest;
+			productReference = C3FB4A2518140E560028B79E /* test05_3_SendImageByR9HTTPRequest copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,6 +248,7 @@
 			projectRoot = "";
 			targets = (
 				C309980817E5DB180017E63A /* test05_3_SendImageByR9HTTPRequest */,
+				C3FB4A0A18140E560028B79E /* Distribution */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +269,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3FB4A1918140E560028B79E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3FB4A1A18140E560028B79E /* InfoPlist.strings in Resources */,
+				C3FB4A1B18140E560028B79E /* Default-568h@2x.png in Resources */,
+				C3FB4A1C18140E560028B79E /* Default.png in Resources */,
+				C3FB4A1D18140E560028B79E /* Default@2x.png in Resources */,
+				C3FB4A1E18140E560028B79E /* InfoPlist.strings in Resources */,
+				C3FB4A1F18140E560028B79E /* MainStoryboard_iPad.storyboard in Resources */,
+				C3FB4A2018140E560028B79E /* MainStoryboard_iPhone.storyboard in Resources */,
+				C3FB4A2118140E560028B79E /* test05_3_SendImageByR9HTTPRequest-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -233,6 +300,22 @@
 				C309986517E5E3D30017E63A /* main.m in Sources */,
 				C309986617E5E3D30017E63A /* MyAppDelegate.m in Sources */,
 				C309986717E5E3D30017E63A /* MyViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3FB4A0B18140E560028B79E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3FB4A0C18140E560028B79E /* NSData+Base64.m in Sources */,
+				C3FB4A0D18140E560028B79E /* NSData+Crypto.m in Sources */,
+				C3FB4A0E18140E560028B79E /* NSString+Crypto.m in Sources */,
+				C3FB4A0F18140E560028B79E /* R9HTTPWSSERequest.m in Sources */,
+				C3FB4A1018140E560028B79E /* R9AppDelegate.m in Sources */,
+				C3FB4A1118140E560028B79E /* R9HTTPRequest.m in Sources */,
+				C3FB4A1218140E560028B79E /* main.m in Sources */,
+				C3FB4A1318140E560028B79E /* MyAppDelegate.m in Sources */,
+				C3FB4A1418140E560028B79E /* MyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +437,32 @@
 			};
 			name = Release;
 		};
+		C3FB4A2318140E560028B79E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AKIHIRO MASUDA (TX7YX2QB8L)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Prefix.pch";
+				INFOPLIST_FILE = "test05_3_SendImageByR9HTTPRequest copy-Info.plist";
+				PRODUCT_NAME = "test05_3_SendImageByR9HTTPRequest copy";
+				PROVISIONING_PROFILE = "C7F481FF-E716-4335-A89F-34395FDFA484";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C3FB4A2418140E560028B79E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AKIHIRO MASUDA (TX7YX2QB8L)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "test05_3_R9HTTPRequest/test05_3_SendImageByR9HTTPRequest-Prefix.pch";
+				INFOPLIST_FILE = "test05_3_SendImageByR9HTTPRequest copy-Info.plist";
+				PRODUCT_NAME = "test05_3_SendImageByR9HTTPRequest copy";
+				PROVISIONING_PROFILE = "C7F481FF-E716-4335-A89F-34395FDFA484";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -371,6 +480,15 @@
 			buildConfigurations = (
 				C309983017E5DB190017E63A /* Debug */,
 				C309983117E5DB190017E63A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3FB4A2218140E560028B79E /* Build configuration list for PBXNativeTarget "Distribution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3FB4A2318140E560028B79E /* Debug */,
+				C3FB4A2418140E560028B79E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

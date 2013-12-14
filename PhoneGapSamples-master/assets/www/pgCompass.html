@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova </title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/cordova.js"></script>
+<!--
+<script src="http://192.168.1.253:8080/target/target-script-min.js#hogehoge"></script>
+-->
+<script type="text/javascript" charset="utf-8" >
+    // The watch id references the current `watchHeading`
+    var watchID = null;
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Update compass every dt seconds
+        var dt = 200;
+        var options = { frequency: dt };
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }
+
+    // onSuccess: Get the current heading
+    //
+    function onSuccess(heading) {
+        $('#val').text('Heading: ' + heading.magneticHeading);
+    }
+
+    // onError: Failed to get the heading
+    //
+    function onError(compassError) {
+        alert('Compass Error: ' + compassError.code);
+    }
+    
+</script>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>Compass</h1>
+            <a href="" data-rel="back">Back</a> <!-- 戻るボタン hrefの内容は無視される -->
+        </div>
+        <div data-role="content">
+            <h3 id="val">Heading : null</h3>
+        </div>
+        <div data-role="footer">
+            <h4>Copyright 2013</h4>
+        </div>
+    </div>
+</body>
+</html>
