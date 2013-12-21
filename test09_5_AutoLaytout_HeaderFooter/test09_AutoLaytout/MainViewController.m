@@ -14,7 +14,7 @@
 #import "MainViewController.h"
 
 #define ROW_HEIGHT 50
-#define FOOTER_HEIGHT 69
+#define FOOTER_HEIGHT 61
 #define HEADER_HEIGHT 49
 
 
@@ -42,6 +42,31 @@
     return self;
 }
 
+// UIViewの背景にセットするための画像作成
+- (void) createImageBackgrownd:(NSString*)imageName view:(UIView*)view
+{
+    if (false){
+        // タイプ１：普通の方法。タイル状に貼り付け
+        UIImage *footerBaseImage = [UIImage imageNamed:imageName]; //フッター背景
+        view.backgroundColor = [UIColor colorWithPatternImage:footerBaseImage];
+    }else{
+        //  タイプ２：領域いっぱいに拡大 こちらのほうが素材のサイズに依らないため望ましい
+        // 注意！！　viewDidLoadが呼び終わった後で無いと、viewのサイズが確定しないらしいので一旦キューに積んで後のMainスレッドで実行されるようにする。
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            CGSize size = view.frame.size;
+            CGRect bounds = view.bounds;
+            UIGraphicsBeginImageContext(size);
+            [[UIImage imageNamed:imageName] drawInRect:bounds];
+            UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+            UIGraphicsEndImageContext();
+            view.backgroundColor = backgroundColor;
+        });
+
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,7 +90,8 @@
     
     //フッタ作成
     UIView *footerBase = [[UIView alloc]init];
-    footerBase.backgroundColor = [self footerColor];
+    // フッタの背景画像設定
+    [self createImageBackgrownd:@"base_black_gradation2.png" view:footerBase];
     //追加
     [self.view addSubview:footerBase];
     
@@ -80,12 +106,7 @@
         [self setAutoLayoutWidthFillParent:headerBase parent:self.view];
         [self setAutoLayoutWidthFillParent:webView parent:self.view];
         [self setAutoLayoutWidthFillParent:footerBase parent:self.view];
-//        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[headerBase(49)][webView][footerBase(49)]|"
         NSString* fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-//         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[headerBase(49)][webView][footerBase(80)]|"
-//                                                              options:0
-//                                                              metrics:nil
-//                                                                views:viewsDictionary];
         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
                                                                        options:0
                                                                        metrics:nil
@@ -98,11 +119,15 @@
     // フッタ内部を作成
     [self buildFooter:footerBase];
     
-    
     //WebViewに何か読み込ませておく
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.kill-la-kill.jp/sp/"]];
     [webView loadRequest:request];
 
+}
+
+- (void)delayExec
+{
+    
 }
 
 // フッターのベース色
@@ -151,15 +176,16 @@
 
     // ボタン画像設定
     [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-//    btn.backgroundColor = [UIColor yellowColor];
     [[btn imageView] setContentMode:UIViewContentModeScaleAspectFill]; //アスペクト比を固定
+    btn.backgroundColor = [UIColor colorWithWhite:0 alpha:0]; //ボタン背景は透過して、ベースの色・画像を出させる
 
     // ラベル設定
     [lbl setText:labelText];
     lbl.textColor = [UIColor whiteColor];
     lbl.textAlignment = NSTextAlignmentCenter; //中央揃え
-//    lbl.font = [UIFont systemFontOfSize:12]; //フォントサイズ
     lbl.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]]; //フォントサイズ
+//    lbl.backgroundColor = [UIColor greenColor];
+    lbl.backgroundColor = [UIColor colorWithWhite:0 alpha:0]; //背景は透過して、ベースの色・画像を出させる
    
     // AutoLayout設定
     // 横方向
@@ -175,6 +201,8 @@
         [footerItemBase addConstraints:constraints];
     }
     
+    // ベースの色
+//    footerItemBase.backgroundColor = [UIColor redColor];
     return footerItemBase;
 }
 
@@ -197,7 +225,7 @@
     //横方向のAutoLayout設定
     {
         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, btn3, btn4); //ここで指定した変数名が、下の設定で使われる
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1][btn2(==btn1)][btn3(==btn1)][btn4(==btn1)]-(8)-|"
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn1][btn2(==btn1)][btn3(==btn1)][btn4(==btn1)]|"
                                                                        options:0
                                                                        metrics:nil
                                                                          views:viewsDictionary];

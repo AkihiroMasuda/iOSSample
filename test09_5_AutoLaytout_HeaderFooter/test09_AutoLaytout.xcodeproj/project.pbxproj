@@ -14,6 +14,8 @@
 		C34CD08B1865C68D0004E3E8 /* link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34CD08A1865C68D0004E3E8 /* link@2x.png */; };
 		C34CD08D1865C69A0004E3E8 /* node-link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34CD08C1865C69A0004E3E8 /* node-link@2x.png */; };
 		C34CD08F1865C9660004E3E8 /* arrow-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34CD08E1865C9660004E3E8 /* arrow-left@2x.png */; };
+		C34CD0911865E7C90004E3E8 /* base_black_gradation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34CD0901865E7C90004E3E8 /* base_black_gradation@2x.png */; };
+		C34CD0931865F44D0004E3E8 /* base_black_gradation2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34CD0921865F44D0004E3E8 /* base_black_gradation2@2x.png */; };
 		C39029BC186549CE00E5AAB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39029BB186549CE00E5AAB9 /* Foundation.framework */; };
 		C39029BE186549CE00E5AAB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39029BD186549CE00E5AAB9 /* CoreGraphics.framework */; };
 		C39029C0186549CE00E5AAB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39029BF186549CE00E5AAB9 /* UIKit.framework */; };
@@ -47,6 +49,8 @@
 		C34CD08A1865C68D0004E3E8 /* link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link@2x.png"; sourceTree = "<group>"; };
 		C34CD08C1865C69A0004E3E8 /* node-link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "node-link@2x.png"; sourceTree = "<group>"; };
 		C34CD08E1865C9660004E3E8 /* arrow-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@2x.png"; sourceTree = "<group>"; };
+		C34CD0901865E7C90004E3E8 /* base_black_gradation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "base_black_gradation@2x.png"; sourceTree = "<group>"; };
+		C34CD0921865F44D0004E3E8 /* base_black_gradation2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "base_black_gradation2@2x.png"; sourceTree = "<group>"; };
 		C39029B8186549CE00E5AAB9 /* test09_AutoLaytout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test09_AutoLaytout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39029BB186549CE00E5AAB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C39029BD186549CE00E5AAB9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,7 +141,9 @@
 		C39029C2186549CE00E5AAB9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C34CD0901865E7C90004E3E8 /* base_black_gradation@2x.png */,
 				C34CD08E1865C9660004E3E8 /* arrow-left@2x.png */,
+				C34CD0921865F44D0004E3E8 /* base_black_gradation2@2x.png */,
 				C34CD0841865C65C0004E3E8 /* equalizer.png */,
 				C34CD08C1865C69A0004E3E8 /* node-link@2x.png */,
 				C34CD0821865C5870004E3E8 /* eject@2x.png */,
@@ -246,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C39029C6186549CE00E5AAB9 /* InfoPlist.strings in Resources */,
+				C34CD0931865F44D0004E3E8 /* base_black_gradation2@2x.png in Resources */,
 				C34CD0871865C66E0004E3E8 /* equalizer@2x.png in Resources */,
 				C34CD08B1865C68D0004E3E8 /* link@2x.png in Resources */,
 				C34CD0891865C67D0004E3E8 /* g-clef@2x.png in Resources */,
@@ -253,6 +260,7 @@
 				C39029CE186549CE00E5AAB9 /* Images.xcassets in Resources */,
 				C34CD0851865C65C0004E3E8 /* equalizer.png in Resources */,
 				C34CD08D1865C69A0004E3E8 /* node-link@2x.png in Resources */,
+				C34CD0911865E7C90004E3E8 /* base_black_gradation@2x.png in Resources */,
 				C34CD0831865C5870004E3E8 /* eject@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
