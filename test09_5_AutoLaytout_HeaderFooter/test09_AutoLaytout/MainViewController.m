@@ -16,7 +16,7 @@
 #define ROW_HEIGHT 50
 
 @interface MainViewController ()
-
+@property UILabel* titleLabel;
 @end
 
 @implementation MainViewController
@@ -100,13 +100,13 @@
 - (UIColor*) footerColor
 {
 //    return [UIColor grayColor];
-    return [UIColor colorWithWhite:0.3 alpha:1.];
+    return [UIColor colorWithWhite:0.1 alpha:1.];
 }
 
 // ヘッダーのベース色
 - (UIColor*) headerColor
 {
-    return [UIColor colorWithWhite:0.3 alpha:1.];
+    return [UIColor colorWithWhite:0.1 alpha:1.];
 }
 
 
@@ -114,10 +114,18 @@
 - (UIButton*)createButtonOnBase:(UIView*)baseView
 {
     UIButton *btn = [[UIButton alloc]init];
-    btn.backgroundColor = [self footerColor];
+    btn.backgroundColor = baseView.backgroundColor;
     [baseView addSubview:btn];
     
     return btn;
+}
+
+// ベース上にラベルを作る
+- (UILabel*)createLabelOnBase:(UIView*)baseView
+{
+    UILabel *label = [[UILabel alloc]init];
+    [baseView addSubview:label];
+    return label;
 }
 
 // フッター作成
@@ -126,21 +134,24 @@
     UIButton *btn1 = [self createButtonOnBase:footerBase];
     UIButton *btn2 = [self createButtonOnBase:footerBase];
     UIButton *btn3 = [self createButtonOnBase:footerBase];
+    UIButton *btn4 = [self createButtonOnBase:footerBase];
 
     // 画像設定
     [btn1 setImage:[UIImage imageNamed:@"node-link.png"] forState:UIControlStateNormal];
     [btn2 setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
     [btn3 setImage:[UIImage imageNamed:@"equalizer.png"] forState:UIControlStateNormal];
+    [btn4 setImage:[UIImage imageNamed:@"g-clef"] forState:UIControlStateNormal];
     
     // AutoLayoutのためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO];
     [btn2 setTranslatesAutoresizingMaskIntoConstraints:NO];
     [btn3 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [btn4 setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     //横方向のAutoLayout設定
     {
-        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, btn3); //ここで指定した変数名が、下の設定で使われる
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1]-[btn2(==btn1)]-[btn3(==btn1)]-(8)-|"
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, btn3, btn4); //ここで指定した変数名が、下の設定で使われる
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1]-[btn2(==btn1)]-[btn3(==btn1)]-[btn4(==btn1)]-(8)-|"
                                                                        options:0
                                                                        metrics:nil
                                                                          views:viewsDictionary];
@@ -151,6 +162,7 @@
     [self setAutoLayoutHeightFillParent:btn1 parent:footerBase];
     [self setAutoLayoutHeightFillParent:btn2 parent:footerBase];
     [self setAutoLayoutHeightFillParent:btn3 parent:footerBase];
+    [self setAutoLayoutHeightFillParent:btn4 parent:footerBase];
     
     
 }
@@ -160,42 +172,57 @@
 {
     UIButton *btn1 = [self createButtonOnBase:headerBase];
     UIButton *btn2 = [self createButtonOnBase:headerBase];
+    UILabel *label = [self createLabelOnBase:headerBase];
+    self.titleLabel = label;
     
     // 画像設定
-    [btn1 setImage:[UIImage imageNamed:@"node-link.png"] forState:UIControlStateNormal];
+    [btn1 setImage:[UIImage imageNamed:@"arrow-left.png"] forState:UIControlStateNormal];
     [btn2 setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
+
+    // ラベル設定
+    [label setText:@"タイトル"];
+    label.textColor = [UIColor whiteColor];
+    //    label.backgroundColor = [UIColor blueColor];
+    label.textAlignment = NSTextAlignmentCenter; //中央揃え
     
     // AutoLayoutのためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO];
     [btn2 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [label setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
     
     //横方向のAutoLayout設定
     {
-        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2); //ここで指定した変数名が、下の設定で使われる
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, label); //ここで指定した変数名が、下の設定で使われる
         NSArray *constraints;
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1]"
-                                                                       options:0
-                                                                       metrics:nil
-                                                                         views:viewsDictionary];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8@100)-[btn1(30@100)]-(100@1)-[btn2(==btn1@100)]-(8@100)-|"
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
         [headerBase addConstraints:constraints];
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[btn2]-(8)-|"
-                                                                       options:0
-                                                                       metrics:nil
-                                                                         views:viewsDictionary];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(40)-[label]-(40)-|"
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
         [headerBase addConstraints:constraints];
     }
     
     //縦方向のAutoLayout設定
     [self setAutoLayoutHeightFillParent:btn1 parent:headerBase];
     [self setAutoLayoutHeightFillParent:btn2 parent:headerBase];
+    [self setAutoLayoutHeightFillParent:label parent:headerBase];
     
 }
 
-
+/**
+ * WebViewコールバック
+ */
 -(void)webViewDidFinishLoad:(UIWebView*)webView
 {
     NSString* url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"url:%@", url);
+    NSString* title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"url:%@   title:%@", url, title);
+    [self.titleLabel setText:title];
 }
 
 /**
