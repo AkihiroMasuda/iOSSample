@@ -30,10 +30,10 @@
 	// Do any additional setup after loading the view.
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(500,100,100,30);
-    [btn setTitle:@"ボボボ簿ボタン" forState:UIControlStateNormal];
+    btn.frame = CGRectMake(200,300,500,30);
+    btn.backgroundColor = [UIColor greenColor];
+    [btn setTitle:@"モーダルビューのボタン" forState:UIControlStateNormal];
     self.view.backgroundColor = [UIColor clearColor]; //モーダルビューを透明化
-    self.view.bounds = CGRectMake(300, 400, 200, 100);
     [self.view addSubview:btn];
  
     

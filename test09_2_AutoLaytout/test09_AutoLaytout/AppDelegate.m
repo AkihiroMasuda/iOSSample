@@ -1,33 +1,27 @@
 //
 //  AppDelegate.m
-//  test08_customViewController
+//  test09_AutoLaytout
 //
-//  Created by 舛田 明寛 on 2013/12/14.
+//  Created by 舛田 明寛 on 2013/12/21.
 //  Copyright (c) 2013年 AkihiroMasuda. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "PopupViewController.h"
 
 @interface AppDelegate()
-@property UIViewController *main;
-//@property (strong, nonatomic) UIWindow *window;
-//@property (strong, nonatomic) ViewController *viewController; // 追加
+@property MainViewController* main;
 @end
 
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // 空アプリを作ったら自動で作られるのここから
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    // 空アプリを作ったら自動で作られるのここまで
     
     // ViewController生成
     _main = [[MainViewController alloc]init];
