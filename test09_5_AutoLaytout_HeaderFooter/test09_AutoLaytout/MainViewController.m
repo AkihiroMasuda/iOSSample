@@ -193,13 +193,17 @@
     
     //横方向のAutoLayout設定
     {
+        // 左ボタン、中央タイトル、右ボタン、とすべて一つのconstraintsで設定できると良かったのだが、失敗したので
+        // 左、右ボタンを１セット、タイトルは別で設定した。
         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, label); //ここで指定した変数名が、下の設定で使われる
         NSArray *constraints;
+        // 左、右ボタンの設定
         constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8@100)-[btn1(30@100)]-(100@1)-[btn2(==btn1@100)]-(8@100)-|"
                                                               options:0
                                                               metrics:nil
                                                                 views:viewsDictionary];
         [headerBase addConstraints:constraints];
+        // 中央タイトルの設定
         constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(40)-[label]-(40)-|"
                                                               options:0
                                                               metrics:nil
@@ -219,10 +223,12 @@
  */
 -(void)webViewDidFinishLoad:(UIWebView*)webView
 {
-    NSString* url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    // タイトル更新
     NSString* title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    NSLog(@"url:%@   title:%@", url, title);
     [self.titleLabel setText:title];
+    // ログ
+    NSString* url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    NSLog(@"url:%@   title:%@", url, title);
 }
 
 /**
