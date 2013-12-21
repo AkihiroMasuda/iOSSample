@@ -94,14 +94,27 @@
     // Configure the cell...
     cell.accessoryType = UITableViewCellAccessoryNone;
     
+//    NSLog(@"row:%d", indexPath.row);
+
+    // セルの中にカスタムビューを作成
+    [self buildViewInCell:cell.contentView];
+    
+    return cell;
+}
+
+/**
+ * セルの中にカスタムビューを作成
+ */
+- (void)buildViewInCell:(UIView*)contentView
+{
     // 基礎ビュー作成
     UIView *viewBase = [[UIView alloc]init];
     viewBase.backgroundColor = [UIColor blueColor];
     // AutoLayout有効にするためのおまじない
     [viewBase setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
     // 基礎ビューをセルに追加
-    [cell.contentView addSubview:viewBase];
-
+    [contentView addSubview:viewBase];
+    
     // ボタン生成
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn1 setTitle:@"ボタン1" forState:UIControlStateNormal];
@@ -115,7 +128,6 @@
     // AutoLayout有効にするためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
     [btn2 setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
-    
     
     // AutoLayoutの設定(基礎ビュー上のボタンについて)
     {
@@ -146,7 +158,7 @@
     
     // AutoLayoutの設定(基礎ビューについて)
     {
-        UIView *parent = cell.contentView;
+        UIView *parent = contentView;
         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(viewBase); //ここで指定した変数名が、下の設定で使われる
         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[viewBase]|" //親ビューいっぱいに広げる
                                                                        options:0
@@ -160,9 +172,6 @@
         [parent addConstraints:constraints];
     }
     
-//    [self updateCell:cell atIndexPath:indexPath];
-    
-    return cell;
 }
 
 
