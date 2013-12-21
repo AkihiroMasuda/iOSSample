@@ -7,7 +7,7 @@
 //
 /**
  *　AutoLayoutサンプル
- *　ビューの入れ子構造
+ *　ヘッダー・フッターを作ってみた
  *
  */
 
@@ -17,9 +17,18 @@
 #define FOOTER_HEIGHT 61
 #define HEADER_HEIGHT 49
 
+#define BUTTON_HEADER_BACK 101
+#define BUTTON_HEADER_LINK 102
+#define BUTTON_FOOTER_SHARE 201
+#define BUTTON_FOOTER_LINK 202
+#define BUTTON_FOOTER_EQUALIZER 203
+#define BUTTON_FOOTER_SONGS 204
 
 @interface MainViewController ()
+@property UIWebView* webView;
 @property UILabel* titleLabel;
+@property (nonatomic, getter = footerColor) UIColor* footerColor;
+@property (nonatomic, getter = headerColor) UIColor* headerColor;
 @end
 
 @implementation MainViewController
@@ -42,31 +51,6 @@
     return self;
 }
 
-// UIViewの背景にセットするための画像作成
-- (void) createImageBackgrownd:(NSString*)imageName view:(UIView*)view
-{
-    if (false){
-        // タイプ１：普通の方法。タイル状に貼り付け
-        UIImage *footerBaseImage = [UIImage imageNamed:imageName]; //フッター背景
-        view.backgroundColor = [UIColor colorWithPatternImage:footerBaseImage];
-    }else{
-        //  タイプ２：領域いっぱいに拡大 こちらのほうが素材のサイズに依らないため望ましい
-        // 注意！！　viewDidLoadが呼び終わった後で無いと、viewのサイズが確定しないらしいので一旦キューに積んで後のMainスレッドで実行されるようにする。
-        dispatch_queue_t mainQueue = dispatch_get_main_queue();
-        dispatch_async(mainQueue, ^{
-            CGSize size = view.frame.size;
-            CGRect bounds = view.bounds;
-            UIGraphicsBeginImageContext(size);
-            [[UIImage imageNamed:imageName] drawInRect:bounds];
-            UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-            UIGraphicsEndImageContext();
-            view.backgroundColor = backgroundColor;
-        });
-
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -78,13 +62,14 @@
     
     //ヘッダ作成
     UIView *headerBase = [[UIView alloc]init];
-    headerBase.backgroundColor = [self headerColor];
+    headerBase.backgroundColor = self.headerColor;
     //追加
     [self.view addSubview:headerBase];
 
     //WebView作成
     UIWebView *webView = [[UIWebView alloc]init];
     webView.delegate = self;
+    _webView = webView;
     //追加
     [self.view addSubview:webView];
     
@@ -130,6 +115,7 @@
     
 }
 
+
 // フッターのベース色
 - (UIColor*) footerColor
 {
@@ -143,6 +129,30 @@
     return [UIColor colorWithWhite:0.1 alpha:1.];
 }
 
+// UIViewの背景にセットするための画像作成
+- (void) createImageBackgrownd:(NSString*)imageName view:(UIView*)view
+{
+    if (false){
+        // タイプ１：普通の方法。タイル状に貼り付け
+        UIImage *footerBaseImage = [UIImage imageNamed:imageName]; //フッター背景
+        view.backgroundColor = [UIColor colorWithPatternImage:footerBaseImage];
+    }else{
+        //  タイプ２：領域いっぱいに拡大 こちらのほうが素材のサイズに依らないため望ましい
+        // 注意！！　viewDidLoadが呼び終わった後で無いと、viewのサイズが確定しないらしいので一旦キューに積んで後のMainスレッドで実行されるようにする。
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            CGSize size = view.frame.size;
+            CGRect bounds = view.bounds;
+            UIGraphicsBeginImageContext(size);
+            [[UIImage imageNamed:imageName] drawInRect:bounds];
+            UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+            UIGraphicsEndImageContext();
+            view.backgroundColor = backgroundColor;
+        });
+        
+    }
+}
 
 // ベース上にボタンを作る
 - (UIButton*)createButtonOnBase:(UIView*)baseView
@@ -163,7 +173,7 @@
 }
 
 // フッターのアイテムを作り、AutoLayout設定する
-- (UIView*)createAndLayoutFooterParent:(UIView*)parent ItemImageNamed:(NSString*)imageName labelText:(NSString*)labelText
+- (UIView*)createAndLayoutFooterParent:(UIView*)parent ItemImageNamed:(NSString*)imageName labelText:(NSString*)labelText action:(SEL)selector buttonTag:(NSInteger)tag
 {
     
     UIView* footerItemBase = [[UIView alloc]init];
@@ -201,8 +211,11 @@
         [footerItemBase addConstraints:constraints];
     }
     
-    // ベースの色
-//    footerItemBase.backgroundColor = [UIColor redColor];
+    // ボタン押下時のコールバック設定
+    footerItemBase.userInteractionEnabled = YES; //通常は不要。ボタンを配置するビューがImageViewのときは、デフォルトがNOになっているため必要らしい
+    [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    btn.tag = tag;
+    
     return footerItemBase;
 }
 
@@ -211,10 +224,10 @@
 // フッター作成
 - (void)buildFooter:(UIView*)footerBase
 {
-    UIView *btn1 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"node-link.png" labelText:@"共有"];
-    UIView *btn2 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"link.png" labelText:@"リンク"];
-    UIView *btn3 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"equalizer.png" labelText:@"イコライザ"];
-    UIView *btn4 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"g-clef.png" labelText:@"songs"];
+    UIView *btn1 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"node-link.png" labelText:@"共有" action:@selector(clickButton:) buttonTag:BUTTON_FOOTER_SHARE];
+    UIView *btn2 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"link.png" labelText:@"リンク" action:@selector(clickButton:) buttonTag:BUTTON_FOOTER_LINK];
+    UIView *btn3 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"equalizer.png" labelText:@"イコライザ" action:@selector(clickButton:) buttonTag:BUTTON_FOOTER_EQUALIZER];
+    UIView *btn4 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"g-clef.png" labelText:@"songs" action:@selector(clickButton:) buttonTag:BUTTON_FOOTER_SONGS];
     
     // AutoLayoutのためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -261,6 +274,15 @@
     //    label.backgroundColor = [UIColor blueColor];
     label.textAlignment = NSTextAlignmentCenter; //中央揃え
     
+    // ボタン押下時のコールバック設定
+    void (^setButtonCallback)(UIButton*, NSInteger) = ^(UIButton* btn, NSInteger tag){
+        [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = tag;
+    };
+    headerBase.userInteractionEnabled = YES; //通常は不要。ボタンを配置するビューがImageViewのときは、デフォルトがNOになっているため必要らしい
+    setButtonCallback(btn1, BUTTON_HEADER_BACK);
+    setButtonCallback(btn2, BUTTON_HEADER_LINK);
+    
     // AutoLayoutのためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO];
     [btn2 setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -305,6 +327,44 @@
     // ログ
     NSString* url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
     NSLog(@"url:%@   title:%@", url, title);
+}
+
+
+/**
+ * ボタン押下コールバック
+ */
+-(void)clickButton:(UIButton*)button
+{
+    NSLog(@"buttonClicked  tag:%ld", (long)(button.tag));
+    
+    switch (button.tag) {
+        case BUTTON_HEADER_BACK:
+            // 前のページに戻る
+            [_webView goBack];
+            break;
+        case BUTTON_FOOTER_SHARE:{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yahoo.co.jp"]];
+            [_webView loadRequest:request];
+            break;
+        }
+        case BUTTON_FOOTER_LINK:{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.moukotanmen-nakamoto.com/"]];
+            [_webView loadRequest:request];
+            break;
+        }
+        case BUTTON_FOOTER_EQUALIZER:{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://developer.android.com/index.html"]];
+            [_webView loadRequest:request];
+            break;
+        }
+        case BUTTON_FOOTER_SONGS:{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.nhk.or.jp/songs/"]];
+            [_webView loadRequest:request];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 /**
