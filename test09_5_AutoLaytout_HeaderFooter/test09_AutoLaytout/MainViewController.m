@@ -14,6 +14,9 @@
 #import "MainViewController.h"
 
 #define ROW_HEIGHT 50
+#define FOOTER_HEIGHT 69
+#define HEADER_HEIGHT 49
+
 
 @interface MainViewController ()
 @property UILabel* titleLabel;
@@ -77,10 +80,16 @@
         [self setAutoLayoutWidthFillParent:headerBase parent:self.view];
         [self setAutoLayoutWidthFillParent:webView parent:self.view];
         [self setAutoLayoutWidthFillParent:footerBase parent:self.view];
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[headerBase(49)][webView][footerBase(49)]|"
-                                                              options:0
-                                                              metrics:nil
-                                                                views:viewsDictionary];
+//        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[headerBase(49)][webView][footerBase(49)]|"
+        NSString* fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
+//         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[headerBase(49)][webView][footerBase(80)]|"
+//                                                              options:0
+//                                                              metrics:nil
+//                                                                views:viewsDictionary];
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
+                                                                       options:0
+                                                                       metrics:nil
+                                                                         views:viewsDictionary];
         [self.view addConstraints:constraints];
     }
     
@@ -128,19 +137,56 @@
     return label;
 }
 
+// フッターのアイテムを作り、AutoLayout設定する
+- (UIView*)createAndLayoutFooterParent:(UIView*)parent ItemImageNamed:(NSString*)imageName labelText:(NSString*)labelText
+{
+    
+    UIView* footerItemBase = [[UIView alloc]init];
+    [parent addSubview:footerItemBase];
+    
+    UIButton *btn = [self createButtonOnBase:footerItemBase];
+    UILabel *lbl = [self createLabelOnBase:footerItemBase];
+    [btn setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [lbl setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    // ボタン画像設定
+    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+//    btn.backgroundColor = [UIColor yellowColor];
+    [[btn imageView] setContentMode:UIViewContentModeScaleAspectFill]; //アスペクト比を固定
+
+    // ラベル設定
+    [lbl setText:labelText];
+    lbl.textColor = [UIColor whiteColor];
+    lbl.textAlignment = NSTextAlignmentCenter; //中央揃え
+//    lbl.font = [UIFont systemFontOfSize:12]; //フォントサイズ
+    lbl.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]]; //フォントサイズ
+   
+    // AutoLayout設定
+    // 横方向
+    [self setAutoLayoutWidthFillParent:btn parent:footerItemBase];
+    [self setAutoLayoutWidthFillParent:lbl parent:footerItemBase];
+    // 縦方向AutoLayout設定
+    {
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn, lbl); //ここで指定した変数名が、下の設定で使われる
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[btn][lbl(>=0)]|"
+                                                                       options:0
+                                                                       metrics:nil
+                                                                         views:viewsDictionary];
+        [footerItemBase addConstraints:constraints];
+    }
+    
+    return footerItemBase;
+}
+
+
+
 // フッター作成
 - (void)buildFooter:(UIView*)footerBase
 {
-    UIButton *btn1 = [self createButtonOnBase:footerBase];
-    UIButton *btn2 = [self createButtonOnBase:footerBase];
-    UIButton *btn3 = [self createButtonOnBase:footerBase];
-    UIButton *btn4 = [self createButtonOnBase:footerBase];
-
-    // 画像設定
-    [btn1 setImage:[UIImage imageNamed:@"node-link.png"] forState:UIControlStateNormal];
-    [btn2 setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
-    [btn3 setImage:[UIImage imageNamed:@"equalizer.png"] forState:UIControlStateNormal];
-    [btn4 setImage:[UIImage imageNamed:@"g-clef"] forState:UIControlStateNormal];
+    UIView *btn1 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"node-link.png" labelText:@"共有"];
+    UIView *btn2 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"link.png" labelText:@"リンク"];
+    UIView *btn3 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"equalizer.png" labelText:@"イコライザ"];
+    UIView *btn4 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"g-clef.png" labelText:@"songs"];
     
     // AutoLayoutのためのおまじない
     [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -151,7 +197,7 @@
     //横方向のAutoLayout設定
     {
         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, btn3, btn4); //ここで指定した変数名が、下の設定で使われる
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1]-[btn2(==btn1)]-[btn3(==btn1)]-[btn4(==btn1)]-(8)-|"
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1][btn2(==btn1)][btn3(==btn1)][btn4(==btn1)]-(8)-|"
                                                                        options:0
                                                                        metrics:nil
                                                                          views:viewsDictionary];
@@ -178,6 +224,8 @@
     // 画像設定
     [btn1 setImage:[UIImage imageNamed:@"arrow-left.png"] forState:UIControlStateNormal];
     [btn2 setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
+    [[btn1 imageView] setContentMode:UIViewContentModeScaleAspectFill]; //アスペクト比を固定
+    [[btn2 imageView] setContentMode:UIViewContentModeScaleAspectFill]; //アスペクト比を固定
 
     // ラベル設定
     [label setText:@"タイトル"];
