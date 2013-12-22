@@ -76,7 +76,7 @@
     //フッタ作成
     UIView *footerBase = [[UIView alloc]init];
     // フッタの背景画像設定
-    [self createImageBackgrownd:@"base_black_gradation2.png" view:footerBase];
+    [self setBackgrowndImage:@"base_black_gradation2.png" view:footerBase];
     //追加
     [self.view addSubview:footerBase];
     
@@ -129,8 +129,8 @@
     return [UIColor colorWithWhite:0.1 alpha:1.];
 }
 
-// UIViewの背景にセットするための画像作成
-- (void) createImageBackgrownd:(NSString*)imageName view:(UIView*)view
+// UIViewの背景に画像を設定する
+- (void) setBackgrowndImage:(NSString*)imageName view:(UIView*)view
 {
     if (false){
         // タイプ１：普通の方法。タイル状に貼り付け
@@ -150,7 +150,6 @@
             UIGraphicsEndImageContext();
             view.backgroundColor = backgroundColor;
         });
-        
     }
 }
 
