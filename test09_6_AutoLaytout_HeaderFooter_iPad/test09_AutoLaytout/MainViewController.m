@@ -90,21 +90,24 @@
     [self.view addSubview:footerBase];
     
     //AutoLayout設定
-    [self setAutoLayout:self.view :headerBase :webView :footerBase isKeyboard:false];
+//    [self setAutoLayout:self.view :headerBase :webView :footerBase isKeyboard:false];
+    [self setAutoLayout:self.view :headerBase :webView :footerBase keyboardHeight:0];
     
     // ヘッダ内部を作成
     [self buildHeader:headerBase];
     // フッタ内部を作成
     [self buildFooter:footerBase];
     
-    //WebViewに何か読み込ませておく
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.kill-la-kill.jp/sp/"]];
-    [webView loadRequest:request];
-
     // キーボード表示／非表示のコールバック登録
     NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
     [notification addObserver:self selector:@selector(keyboardWillShow:) name: UIKeyboardWillShowNotification object:nil];
 	[notification addObserver:self selector:@selector(keyboardWillHide:) name: UIKeyboardWillHideNotification object:nil];
+    
+    //WebViewに何か読み込ませておく
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.kill-la-kill.jp/sp/"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]];
+    
+    [webView loadRequest:request];
     
 }
 
@@ -114,7 +117,7 @@
 }
 
 // ヘッダ・フッタ・コンテンツのオートレイアウト設定
-- (void)setAutoLayout:(UIView*)parent :(UIView*)headerBase :(UIView*)webView :(UIView*)footerBase isKeyboard:(BOOL)isKeyoboard
+- (void)setAutoLayout:(UIView*)parent :(UIView*)headerBase :(UIView*)webView :(UIView*)footerBase keyboardHeight:(int)keyboardHeight
 {
     // 一旦すべての制約を解除
     NSArray *consts =parent.constraints;
@@ -136,21 +139,27 @@
     // 向きによって変える
     NSString* fmt;
     if ([self isPortrait]){
-        if (isKeyoboard){
-            //キーボード表示中
-            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
-        }else{
-            //キーボード非表示中
-            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
-        }
+//        keyboardHeight
+        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT*2, keyboardHeight];
+//        
+//        if (isKeyoboard){
+//            //キーボード表示中
+//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
+//        }else{
+//            //キーボード非表示中
+//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
+//        }
     }else{
-        if (isKeyoboard){
-            //キーボード表示中
-            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-        }else{
-            //キーボード非表示中
-            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-        }
+        
+        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT, keyboardHeight];
+//        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT, 3];
+//        if (isKeyoboard){
+//            //キーボード表示中
+//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT];
+//        }else{
+//            //キーボード非表示中
+//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
+//        }
     }
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
                                                                    options:0
@@ -388,7 +397,8 @@
 - (BOOL)shouldAutorotate
 {
     // トップレベルのビューのオートレイアウト
-    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase isKeyboard:false];
+//    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase isKeyboard:false];
+    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase keyboardHeight:0];
     // フッターのオートレイアウト
     [self setFooterAutoLayout:_footerBase
                              :_footerBtn1
@@ -547,14 +557,20 @@
  */
 - (void)keyboardWillShow:(NSNotification *)notificatioin
 {
+    // キーボードのサイズを取得
+    CGRect keyboard = [[[notificatioin userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboard = [[self.view superview] convertRect:keyboard fromView:nil];
+    NSLog(@"keyboardWillShow : h=%lf w=%lf", keyboard.size.height, keyboard.size.width);
+    int keyHeight = MIN(keyboard.size.height, keyboard.size.width); //キーボードの高さを取りたいが、画面方向によって使うべき値が変わる。めんどいのでキーボードは常に横長であるという前提を使って求める
+    
+    //キーボードのanimationDurationを取得
+    NSTimeInterval animationDuration = [[[notificatioin userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
     // レイアウトを再設定
-    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase isKeyboard:true];
+    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase keyboardHeight:keyHeight];
     // アニメーション指定
-    [UIView animateWithDuration:0.3f
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                     }];
-    NSLog(@"keyboardWillShow");
+    [UIView animateWithDuration:animationDuration animations:^{ [self.view layoutIfNeeded]; }];
+    NSLog(@"keyboardWillShow, %f",animationDuration);
 }
 
 /*
@@ -562,15 +578,14 @@
  */
 - (void)keyboardWillHide:(NSNotification *)notificatioin
 {
+    //キーボードのanimationDurationを取得
+    NSTimeInterval animationDuration = [[[notificatioin userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     // レイアウトを再設定
-    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase isKeyboard:false];
+    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase keyboardHeight:0];
     // アニメーション指定
-    [UIView animateWithDuration:0.3f
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                     }];
+    [UIView animateWithDuration:animationDuration animations:^{ [self.view layoutIfNeeded]; }];
     
-    NSLog(@"keyboardWillHide");
+    NSLog(@"keyboardWillHide, %f",animationDuration);
 }
 
 
