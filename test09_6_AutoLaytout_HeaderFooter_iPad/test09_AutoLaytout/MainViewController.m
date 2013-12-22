@@ -27,6 +27,7 @@
 @interface MainViewController ()
 @property UIWebView* webView;
 @property UILabel* titleLabel;
+@property UIView* headerBase;
 @property UIView* footerBase;
 @property UIView* footerBtn1;
 @property UIView* footerBtn2;
@@ -69,6 +70,7 @@
     //ヘッダ作成
     UIView *headerBase = [[UIView alloc]init];
     headerBase.backgroundColor = self.headerColor;
+    _headerBase = headerBase;
     //追加
     [self.view addSubview:headerBase];
 
@@ -81,29 +83,14 @@
     
     //フッタ作成
     UIView *footerBase = [[UIView alloc]init];
+    _footerBase = footerBase;
     // フッタの背景画像設定
     [self setBackgrowndImage:@"base_black_gradation2.png" view:footerBase];
     //追加
     [self.view addSubview:footerBase];
     
-    //おまじない
-    [headerBase setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [webView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [footerBase setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     //AutoLayout設定
-    {
-        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(headerBase, webView, footerBase); //ここで指定した変数名が、下の設定で使われる
-        [self setAutoLayoutWidthFillParent:headerBase parent:self.view];
-        [self setAutoLayoutWidthFillParent:webView parent:self.view];
-        [self setAutoLayoutWidthFillParent:footerBase parent:self.view];
-        NSString* fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
-                                                                       options:0
-                                                                       metrics:nil
-                                                                         views:viewsDictionary];
-        [self.view addConstraints:constraints];
-    }
+    [self setAutoLayout:self.view :headerBase :webView :footerBase];
     
     // ヘッダ内部を作成
     [self buildHeader:headerBase];
@@ -121,6 +108,44 @@
     
 }
 
+// ヘッダ・フッタ・コンテンツのオートレイアウト設定
+- (void)setAutoLayout:(UIView*)parent :(UIView*)headerBase :(UIView*)webView :(UIView*)footerBase
+{
+    // 一旦すべての制約を解除
+    NSArray *consts =parent.constraints;
+    [parent removeConstraints:consts];
+    
+    //おまじない
+    [headerBase setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [webView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [footerBase setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+
+    // 縦用のレイアウト設定
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(headerBase, webView, footerBase); //ここで指定した変数名が、下の設定で使われる
+    // 水平方向設定
+    [self setAutoLayoutWidthFillParent:headerBase parent:self.view];
+    [self setAutoLayoutWidthFillParent:webView parent:self.view];
+    [self setAutoLayoutWidthFillParent:footerBase parent:self.view];
+    // 垂直方向設定
+    // 向きによって変える
+    NSString* fmt;
+    if ([self isPortrait]){
+        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
+    }else{
+        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
+    }
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
+                                                                   options:0
+                                                                   metrics:nil
+                                                                     views:viewsDictionary];
+    [self.view addConstraints:constraints];
+
+    // フッターの高さが向きによって変わるので、
+    // 高さを確定させたあとで背景画像を再設定する。
+    [self setBackgrowndImage:@"base_black_gradation2.png" view:footerBase];
+    
+}
 
 // フッターのベース色
 - (UIColor*) footerColor
@@ -277,7 +302,12 @@
     //横方向のAutoLayout設定
     {
         NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1, btn2, btn3, btn4, search); //ここで指定した変数名が、下の設定で使われる
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn1][btn2(==btn1)][btn3(==btn1)][btn4(==btn1)][search(400)]|"
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn1][btn2(==btn1)][btn3(==btn1)][btn4(==btn1)]|"
+                                                                       options:0
+                                                                       metrics:nil
+                                                                         views:viewsDictionary];
+        [footerBase addConstraints:constraints];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[search(400)]|"
                                                                        options:0
                                                                        metrics:nil
                                                                          views:viewsDictionary];
@@ -285,12 +315,44 @@
     }
     
     //縦方向のAutoLayout設定
-    [self setAutoLayoutHeightFillParent:btn1 parent:footerBase];
-    [self setAutoLayoutHeightFillParent:btn2 parent:footerBase];
-    [self setAutoLayoutHeightFillParent:btn3 parent:footerBase];
-    [self setAutoLayoutHeightFillParent:btn4 parent:footerBase];
-    [self setAutoLayoutHeightFillParent:search parent:footerBase];
-    
+    {
+        void (^setBtnConst)(UIView *name, BOOL isUp) = ^(UIView *name, BOOL isUp){
+            NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(name); //ここで指定した変数名が、下の設定で使われる
+            int haba = footerBase.frame.size.height/2;
+            NSLog(@"haba:%d",haba);
+            NSArray *constraints;
+            NSString *basefmt = isUp ? @"V:|[name(%d)]" : @"V:[name(%d)]|";
+            NSString *fmt = [NSString stringWithFormat:basefmt, haba];
+            constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:viewsDictionary];
+            [footerBase addConstraints:constraints];
+        };
+        
+        setBtnConst(btn1, false);
+        setBtnConst(btn2, false);
+        setBtnConst(btn3, false);
+        setBtnConst(btn4, false);
+        setBtnConst(search, true);
+        
+    }
+}
+
+- (BOOL)isPortrait
+{
+    //向きを調べる
+    int orientation = [[UIDevice currentDevice] orientation];
+    switch ( orientation ) {
+        case UIDeviceOrientationLandscapeLeft:
+        case UIDeviceOrientationLandscapeRight:
+            return false;
+        case UIDeviceOrientationPortraitUpsideDown:
+        case UIDeviceOrientationPortrait:
+        default:
+            return true;
+            break;
+    }
 }
 
 // フッターのオートレイアウト設定
@@ -301,32 +363,26 @@
     [footerBase removeConstraints:consts];
     
     //向きを調べる
-    int orientation = [[UIDevice currentDevice] orientation];
-    switch ( orientation ) {
-        case UIDeviceOrientationLandscapeLeft:
-        case UIDeviceOrientationLandscapeRight:
-            // 横画面用
-            [self setFooterAutoLayoutForLandscape:footerBase :btn1 :btn2 :btn3 :btn4 :search];
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-        case UIDeviceOrientationPortrait:
-            //縦画面用
-            [self setFooterAutoLayoutForPortrait:footerBase :btn1 :btn2 :btn3 :btn4 :search];
-            break;
-        default:
-            break;
-    }
+    [self isPortrait] ?
+        //縦画面用
+        [self setFooterAutoLayoutForPortrait:footerBase :btn1 :btn2 :btn3 :btn4 :search]
+    :
+        // 横画面用
+        [self setFooterAutoLayoutForLandscape:footerBase :btn1 :btn2 :btn3 :btn4 :search];
 }
 
 // 画面回転許可
 - (BOOL)shouldAutorotate
 {
-    [self setFooterAutoLayout:self.footerBase
-                                        :self.footerBtn1
-                                        :self.footerBtn2
-                                        :self.footerBtn3
-                                        :self.footerBtn4
-                                        :self.footerSearchBar];
+    // トップレベルのビューのオートレイアウト
+    [self setAutoLayout:self.view :_headerBase :_webView :_footerBase];
+    // フッターのオートレイアウト
+    [self setFooterAutoLayout:_footerBase
+                             :_footerBtn1
+                             :_footerBtn2
+                             :_footerBtn3
+                             :_footerBtn4
+                             :_footerSearchBar];
     
     return YES;
 }
@@ -347,12 +403,11 @@
     UIView *btn4 = [self createAndLayoutFooterParent:footerBase ItemImageNamed:@"g-clef.png" labelText:@"songs" action:@selector(clickButton:) buttonTag:BUTTON_FOOTER_SONGS];
     UISearchBar *search = [self createSearchBarOnBase:footerBase];
     
-    self.footerBase = footerBase;
-    self.footerBtn1 = btn1;
-    self.footerBtn2 = btn2;
-    self.footerBtn3 = btn3;
-    self.footerBtn4 = btn4;
-    self.footerSearchBar = search;
+    _footerBtn1 = btn1;
+    _footerBtn2 = btn2;
+    _footerBtn3 = btn3;
+    _footerBtn4 = btn4;
+    _footerSearchBar = search;
     
     // 検索窓の設定
     search.barTintColor = [UIColor colorWithWhite:0. alpha:0.]; //背景を透明に
