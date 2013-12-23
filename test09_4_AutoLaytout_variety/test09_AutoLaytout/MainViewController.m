@@ -107,6 +107,9 @@
         case 2:
             [self buildViewInCell02:cell.contentView];
             break;
+        case 3:
+            [self buildViewInCell03:cell.contentView];
+            break;
         default:
             [self buildViewInCell:cell.contentView];
             break;
@@ -150,13 +153,13 @@
     
     // ボタン生成
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn1 setTitle:@"ボタン1" forState:UIControlStateNormal];
+    [btn1 setTitle:@"ボタンを" forState:UIControlStateNormal];
     btn1.backgroundColor = [UIColor greenColor];
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn2 setTitle:@"ボタン2" forState:UIControlStateNormal];
+    [btn2 setTitle:@"均等に" forState:UIControlStateNormal];
     btn2.backgroundColor = [UIColor greenColor];
     UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn3 setTitle:@"ボタン3" forState:UIControlStateNormal];
+    [btn3 setTitle:@"配置した" forState:UIControlStateNormal];
     btn3.backgroundColor = [UIColor greenColor];
     // 基礎ビューに追加
     [viewBase addSubview:btn1]; //制約設定前にこれ追加してないとダメっぽい
@@ -219,10 +222,10 @@
     [btn1 setTitle:@"ボタン1" forState:UIControlStateNormal];
     btn1.backgroundColor = [UIColor greenColor];
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn2 setTitle:@"ボタン2" forState:UIControlStateNormal];
+    [btn2 setTitle:@"真ん中と右を" forState:UIControlStateNormal];
     btn2.backgroundColor = [UIColor greenColor];
     UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn3 setTitle:@"ボタン3" forState:UIControlStateNormal];
+    [btn3 setTitle:@"均等に配置" forState:UIControlStateNormal];
     btn3.backgroundColor = [UIColor greenColor];
     // 基礎ビューに追加
     [viewBase addSubview:btn1]; //制約設定前にこれ追加してないとダメっぽい
@@ -282,10 +285,10 @@
     
     // ボタン生成
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn1 setTitle:@"ボタン1" forState:UIControlStateNormal];
+    [btn1 setTitle:@"縦幅は均等に" forState:UIControlStateNormal];
     btn1.backgroundColor = [UIColor greenColor];
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn2 setTitle:@"ボタン2ああ" forState:UIControlStateNormal];
+    [btn2 setTitle:@"横幅は文字幅に合わせて可変" forState:UIControlStateNormal];
     btn2.backgroundColor = [UIColor yellowColor];
     // 基礎ビューに追加
     [viewBase addSubview:btn1]; //制約設定前にこれ追加してないとダメっぽい
@@ -320,6 +323,71 @@
     // AutoLayoutの設定(基礎ビューについて)
     [self setAutoLayoutOfBaseView:viewBase parentView:contentView];
 }
+
+
+/**
+ * セルの中にカスタムビューを作成
+ * ボタン幅を文字幅にあわせて可変にする
+ */
+- (void)buildViewInCell03:(UIView*)contentView
+{
+    // 基礎ビュー作成
+    UIView *viewBase = [[UIView alloc]init];
+    viewBase.backgroundColor = [UIColor blueColor];
+    // AutoLayout有効にするためのおまじない
+    [viewBase setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
+    // 基礎ビューをセルに追加
+    [contentView addSubview:viewBase];
+    
+    // ボタン生成
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn1 setTitle:@"　　　　　　　　　　　　　　下のボタン" forState:UIControlStateNormal];
+    btn1.backgroundColor = [UIColor greenColor];
+    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn2 setTitle:@"下のボタンの上に重ねてみる" forState:UIControlStateNormal];
+    btn2.backgroundColor = [UIColor yellowColor];
+    // 基礎ビューに追加
+    [viewBase addSubview:btn1]; //制約設定前にこれ追加してないとダメっぽい
+    [viewBase addSubview:btn2]; //制約設定前にこれ追加してないとダメっぽい
+    // AutoLayout有効にするためのおまじない
+    [btn1 setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
+    [btn2 setTranslatesAutoresizingMaskIntoConstraints:NO]; // 必須
+    
+    // AutoLayoutの設定(基礎ビュー上のボタンについて)
+    {
+        UIView *parent = viewBase;
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(btn1,btn2); //ここで指定した変数名が、下の設定で使われる
+        NSArray *constraints;
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(8)-[btn1(>=0)]" // 文字幅に合わせて可変
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [parent addConstraints:constraints];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(16)-[btn2(>=0)]" // 文字幅に合わせて可変
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [parent addConstraints:constraints];
+        // 垂直方向
+        // ボタン１は基礎ビューよりやや狭く
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(4)-[btn1]-(4)-|"
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [parent addConstraints:constraints];
+        // その上のボタン２はボタン１よりさらに狭く
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(8)-[btn2]-(8)-|"
+                                                              options:0
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [parent addConstraints:constraints];
+    }
+    
+    // AutoLayoutの設定(基礎ビューについて)
+    [self setAutoLayoutOfBaseView:viewBase parentView:contentView];
+}
+
+
 
 
 
