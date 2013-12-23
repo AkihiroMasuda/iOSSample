@@ -139,27 +139,9 @@
     // 向きによって変える
     NSString* fmt;
     if ([self isPortrait]){
-//        keyboardHeight
         fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT*2, keyboardHeight];
-//        
-//        if (isKeyoboard){
-//            //キーボード表示中
-//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
-//        }else{
-//            //キーボード非表示中
-//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT*2];
-//        }
     }else{
-        
         fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT, keyboardHeight];
-//        fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]-(%d)-|", HEADER_HEIGHT, FOOTER_HEIGHT, 3];
-//        if (isKeyoboard){
-//            //キーボード表示中
-//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][footerBase(%d)][webView]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-//        }else{
-//            //キーボード非表示中
-//            fmt = [NSString stringWithFormat:@"V:|-(20)-[headerBase(%d)][webView][footerBase(%d)]|", HEADER_HEIGHT, FOOTER_HEIGHT];
-//        }
     }
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:fmt
                                                                    options:0
