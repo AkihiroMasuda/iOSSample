@@ -19,6 +19,7 @@
 		C3972AA818CAD92900D265BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3972A9018CAD92900D265BA /* UIKit.framework */; };
 		C3972AB018CAD92900D265BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3972AAE18CAD92900D265BA /* InfoPlist.strings */; };
 		C3972AB218CAD92900D265BA /* test11_PlotlyTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3972AB118CAD92900D265BA /* test11_PlotlyTestTests.m */; };
+		C3972ABD18CAD94E00D265BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3972ABC18CAD94E00D265BA /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		C3972AAD18CAD92900D265BA /* test11_PlotlyTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test11_PlotlyTestTests-Info.plist"; sourceTree = "<group>"; };
 		C3972AAF18CAD92900D265BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C3972AB118CAD92900D265BA /* test11_PlotlyTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test11_PlotlyTestTests.m; sourceTree = "<group>"; };
+		C3972ABB18CAD94E00D265BA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		C3972ABC18CAD94E00D265BA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				C3972A9C18CAD92900D265BA /* AppDelegate.m */,
 				C3972A9E18CAD92900D265BA /* Images.xcassets */,
 				C3972A9318CAD92900D265BA /* Supporting Files */,
+				C3972ABB18CAD94E00D265BA /* MainViewController.h */,
+				C3972ABC18CAD94E00D265BA /* MainViewController.m */,
 			);
 			path = test11_PlotlyTest;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3972A9D18CAD92900D265BA /* AppDelegate.m in Sources */,
+				C3972ABD18CAD94E00D265BA /* MainViewController.m in Sources */,
 				C3972A9918CAD92900D265BA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

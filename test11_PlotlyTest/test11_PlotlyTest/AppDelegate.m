@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
+
+@interface AppDelegate()
+@property (atomic) UIViewController* main;
+@end
 
 @implementation AppDelegate
 
@@ -16,6 +21,13 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    // ViewController生成
+    _main = [[MainViewController alloc]init];
+    // rootViewControllerにセットするのがポイント
+    self.window.rootViewController = self.main;
+    
+    
     return YES;
 }
 
