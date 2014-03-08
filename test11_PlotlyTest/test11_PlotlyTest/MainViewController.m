@@ -48,10 +48,11 @@
 
 - (void)onButtonClick:(UIButton*)btn
 {
-    NSArray *data = @[ @[@(1.5), @(2.2), @(3.9)], @[@(10), @(20), @(30)], @[@(101), @(206.2), @(300.4)]];
+//    NSArray *data = @[ @[@(1.5), @(2.2), @(3.9)], @[@(10), @(20), @(30)], @[@(101), @(206.2), @(300.4)]];
+    NSArray *data = @[ @[@(15), @(22), @(39)], @[@(10), @(20), @(30)], @[@(101), @(206.2), @(300.4)]];
     NSArray *labels = @[ @"x1", @"y1", @"y2" ];
     PlotlyClient* pcl = [[PlotlyClient alloc] initWithUserName:USER_NAME key:API_KEY];
-    [pcl postPlotWithData:data labels:labels];
+    [pcl postPlotWithData:data labels:labels filename:@"my"];
 }
 
 - (UIAlertView*)makeAlert

@@ -83,7 +83,7 @@
 }
 
 
-- (void)postPlotWithData:(NSArray*)data labels:(NSArray*)labels
+- (void)postPlotWithData:(NSArray*)data labels:(NSArray*)labels filename:(NSString*)fname
 {
     NSURL *theURL = [NSURL URLWithString:@"https://plot.ly/clientresp"];
     
@@ -91,10 +91,8 @@
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:theURL];
     [req setHTTPMethod:@"POST"];	//メソッドをPOSTに指定します
     
-//    NSArray *data = @[ @[@(1.5), @(2.2), @(3.9)], @[@(10), @(20), @(30)], @[@(101), @(206.2), @(300.4)]];
-//    NSArray *label = @[ @"x1", @"y1", @"y2" ];
-//    PlotlyClient* pcl = [[PlotlyClient alloc] initWithUserName:USER_NAME key:API_KEY];
-    NSString *params =[self createParamsStringForPlotlyWithData:data label:labels filename:@"newdata"];
+    // パラメータ作成
+    NSString *params =[self createParamsStringForPlotlyWithData:data label:labels filename:fname];
     [req setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];		//パラメータを渡します
     
     NSURLConnection *theConnection=[[NSURLConnection alloc]
@@ -117,7 +115,7 @@ didReceiveResponse:(NSURLResponse *)response
     didReceiveData:(NSData *)data
 {
     NSLog(@"receive data");
-    _receivedData = data;
+    _receivedData = [data copy];
 }
 
 - (void)connection:(NSURLConnection *)connection

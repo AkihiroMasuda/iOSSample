@@ -43,6 +43,6 @@
  *  label ... ラベル
  *  label[i] ... data[i]のラベル
  */
-- (void)postPlotWithData:(NSArray*)data labels:(NSArray*)labels;
+- (void)postPlotWithData:(NSArray*)data labels:(NSArray*)labels filename:(NSString*)fname;
 
 @end
