@@ -38,6 +38,9 @@
     _btn.frame = CGRectMake(10,10,100,200);
     [_btn addTarget:self action:@selector(onButtonClick:) forControlEvents:UIControlEventTouchDown];
     
+    
+
+    
     [self.view addSubview:_btn];
     
 }
@@ -53,37 +56,37 @@
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:theURL];
     [req setHTTPMethod:@"POST"];	//メソッドをPOSTに指定します
     
-    NSString *params = [NSString stringWithFormat:@"un=akidn8&key=1te408sxxd&"
-                        "origin=plot&"
-                        "platform=lisp&"
-//                        "args=[[0, 1, 2], [3, 4, 5], [0,1, 2], [6, 6, 5]]&"
-//                        "args=[[0, 1, 2], [3, 4, 5], [6, 6, 5]]&"
-                        "args=[{"
-                        "\"x\":[1,2,3],"
-                        "\"y\":[40,50,60],"
-                        "\"name\":\"data1\""
-                        "},"
-                        "{"
-                        "\"x\":[1,2,3],"
-                        "\"y\":[4,5,6],"
-                        "\"name\":\"data2\""
-                        "},"
-                        "{"
-                        "\"x\":[1,2,3],"
-                        "\"y\":[100,105,90],"
-                        "\"name\":\"data3\""
-                        "}]&"
-                        "kwargs={\"filename\": \"plot from api\","
-                            "\"fileopt\": \"overwrite\","
-//                            "\"style\": {"
-//                            "    \"type\": \"bar\""
+//    NSString *params = [NSString stringWithFormat:@"un=akidn8&key=1te408sxxd&"
+//                        "origin=plot&"
+//                        "platform=lisp&"
+//                        "args=[{"
+//                        "\"x\":[1,2,3],"
+//                        "\"y\":[40,50,60],"
+//                        "\"name\":\"data1\""
+//                        "},"
+//                        "{"
+//                        "\"x\":[1,2,3],"
+//                        "\"y\":[4,5,6],"
+//                        "\"name\":\"data2\""
+//                        "},"
+//                        "{"
+//                        "\"x\":[1,2,3],"
+//                        "\"y\":[100,105,90],"
+//                        "\"name\":\"data3\""
+//                        "}]&"
+//                        "kwargs={\"filename\": \"plot from api\","
+//                            "\"fileopt\": \"overwrite\","
+//                            "\"layout\": {"
+//                            "    \"title\": \"experimental data\""
 //                            "},"
-//                            "\"traces\": [1],"
-                            "\"layout\": {"
-                            "    \"title\": \"experimental data\""
-                            "},"
-                            "\"world_readable\": true"
-                        "}"];
+//                            "\"world_readable\": true"
+//                        "}"];
+    
+
+    NSArray *data = @[ @[@(1), @(2), @(3)], @[@(10), @(20), @(30)]];
+    NSArray *label = @[ @"x1", @"y1" ];
+    NSString *params =[self createParamsStringForPlotlyWithData:data label:label];
+    
     [req setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];		//パラメータを渡します
     
     
@@ -107,6 +110,7 @@
     return alert;
 }
 
+#pragma mark -NSURL delegate
 
 - (void)connection:(NSURLConnection *)connection
 didReceiveResponse:(NSURLResponse *)response
@@ -136,6 +140,72 @@ didReceiveResponse:(NSURLResponse *)response
                                       encoding:NSUTF8StringEncoding]);
 }
 
+#pragma mark -param editor for plotly
+
+/**
+ * plotly送信用パラメータを作成する
+ * @arg:data ... 入力データ
+ *  data[0] .... xデータの配列
+ *  data[1] .... y1データの配列
+ *  data[2] .... y2データの配列
+ *  label ... ラベル　　
+ *  label[i] ... data[i]のラベル
+ */
+- (NSString*)createParamsStringForPlotlyWithData:(NSArray*)data label:(NSArray*)label
+{
+    int datanum = [data count];
+    
+//    "args=[{"
+//    "\"x\":[1,2,3],"
+//    "\"y\":[40,50,60],"
+//    "\"name\":\"data1\""
+//    "},"
+    
+    
+    NSString *argStr = @"args=[";
+    
+    NSArray *dx = data[0];
+    
+    int i=0;
+    for (NSArray *d in data){
+        NSString *argStrOne = @"{";
+        
+        NSString *strX = @"\"x\":[";
+        strX = [[strX stringByAppendingString:[dx componentsJoinedByString:@","]] stringByAppendingString:@"],"];
+        NSString *strY = @"\"y\":[";
+        strY = [[strY stringByAppendingString:[d componentsJoinedByString:@","]] stringByAppendingString:@"],"];
+        NSString *strN = @"\"name\":\"";
+        strN = [[strN stringByAppendingString:label[i]] stringByAppendingString:@"\""];
+        argStrOne = [argStrOne stringByAppendingString:strX];
+        argStrOne = [argStrOne stringByAppendingString:strY];
+        argStrOne = [argStrOne stringByAppendingString:strN];
+        argStrOne = [argStrOne stringByAppendingString:@"},"];
+        
+        argStr = [argStr stringByAppendingString:argStrOne];
+        ++i;
+    }
+    // 最後の一文字(カンマ)を削除
+    int length = [argStr length];
+    argStr = [argStr substringToIndex:(length-1)];
+    argStr = [argStr stringByAppendingString:@"]"];
+    
+    NSString *params = [NSString stringWithFormat:@"un=akidn8&key=1te408sxxd&"
+                        "origin=plot&"
+                        "platform=lisp&"
+                        "%@"
+                        "&"
+                        "kwargs={\"filename\": \"plot from api\","
+                        "\"fileopt\": \"overwrite\","
+                        "\"layout\": {"
+                        "    \"title\": \"experimental data\""
+                        "},"
+                        "\"world_readable\": true"
+                        "}", argStr];
+    
+    
+    
+    return params;
+}
 
 - (void)didReceiveMemoryWarning
 {
