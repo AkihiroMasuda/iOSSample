@@ -47,45 +47,16 @@
 
 - (void)onButtonClick:(UIButton*)btn
 {
-//    [self makeAlert].show;
-    
     // ここから追加
     NSURL *theURL = [NSURL URLWithString:@"https://plot.ly/clientresp"];
     
     // リクエスト作成
     NSMutableURLRequest *req=[NSMutableURLRequest requestWithURL:theURL];
     [req setHTTPMethod:@"POST"];	//メソッドをPOSTに指定します
-    
-//    NSString *params = [NSString stringWithFormat:@"un=akidn8&key=1te408sxxd&"
-//                        "origin=plot&"
-//                        "platform=lisp&"
-//                        "args=[{"
-//                        "\"x\":[1,2,3],"
-//                        "\"y\":[40,50,60],"
-//                        "\"name\":\"data1\""
-//                        "},"
-//                        "{"
-//                        "\"x\":[1,2,3],"
-//                        "\"y\":[4,5,6],"
-//                        "\"name\":\"data2\""
-//                        "},"
-//                        "{"
-//                        "\"x\":[1,2,3],"
-//                        "\"y\":[100,105,90],"
-//                        "\"name\":\"data3\""
-//                        "}]&"
-//                        "kwargs={\"filename\": \"plot from api\","
-//                            "\"fileopt\": \"overwrite\","
-//                            "\"layout\": {"
-//                            "    \"title\": \"experimental data\""
-//                            "},"
-//                            "\"world_readable\": true"
-//                        "}"];
-    
 
     NSArray *data = @[ @[@(1), @(2), @(3)], @[@(10), @(20), @(30)]];
     NSArray *label = @[ @"x1", @"y1" ];
-    NSString *params =[self createParamsStringForPlotlyWithData:data label:label];
+    NSString *params =[self createParamsStringForPlotlyWithData:data label:label filename:@"newdata"];
     
     [req setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];		//パラメータを渡します
     
@@ -151,21 +122,10 @@ didReceiveResponse:(NSURLResponse *)response
  *  label ... ラベル　　
  *  label[i] ... data[i]のラベル
  */
-- (NSString*)createParamsStringForPlotlyWithData:(NSArray*)data label:(NSArray*)label
+- (NSString*)createParamsStringForPlotlyWithData:(NSArray*)data label:(NSArray*)label filename:(NSString*)fname
 {
-    int datanum = [data count];
-    
-//    "args=[{"
-//    "\"x\":[1,2,3],"
-//    "\"y\":[40,50,60],"
-//    "\"name\":\"data1\""
-//    "},"
-    
-    
     NSString *argStr = @"args=[";
-    
     NSArray *dx = data[0];
-    
     int i=0;
     for (NSArray *d in data){
         NSString *argStrOne = @"{";
@@ -194,13 +154,14 @@ didReceiveResponse:(NSURLResponse *)response
                         "platform=lisp&"
                         "%@"
                         "&"
-                        "kwargs={\"filename\": \"plot from api\","
+//                        "kwargs={\"filename\": \"plot from api\","
+                        "kwargs={\"filename\": \"%@\","
                         "\"fileopt\": \"overwrite\","
                         "\"layout\": {"
                         "    \"title\": \"experimental data\""
                         "},"
                         "\"world_readable\": true"
-                        "}", argStr];
+                        "}", argStr, fname];
     
     
     
