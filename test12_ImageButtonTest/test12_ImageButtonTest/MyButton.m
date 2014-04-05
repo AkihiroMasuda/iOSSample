@@ -80,7 +80,7 @@
             break;
     }
     
-    // 常に表示フラグが立っていたら非表示に強制変更
+    // 常に非表示フラグが立っていたら非表示に強制変更
     if (_isPemanentlyHidden){
         self.hidden = YES;
     }
