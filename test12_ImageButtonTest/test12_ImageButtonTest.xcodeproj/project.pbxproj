@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C36402B818EFC56700F04D4F /* img00.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C36402B618EFC56700F04D4F /* img00.jpg */; };
+		C36402B918EFC56700F04D4F /* img01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C36402B718EFC56700F04D4F /* img01.jpg */; };
+		C36402BC18EFFF2A00F04D4F /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C36402BB18EFFF2A00F04D4F /* MyButton.m */; };
 		C3E2FC8718EFC30800F61ED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E2FC8618EFC30800F61ED2 /* Foundation.framework */; };
 		C3E2FC8918EFC30800F61ED2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E2FC8818EFC30800F61ED2 /* CoreGraphics.framework */; };
 		C3E2FC8B18EFC30800F61ED2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E2FC8A18EFC30800F61ED2 /* UIKit.framework */; };
@@ -35,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C36402B618EFC56700F04D4F /* img00.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img00.jpg; sourceTree = "<group>"; };
+		C36402B718EFC56700F04D4F /* img01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img01.jpg; sourceTree = "<group>"; };
+		C36402BA18EFFF2A00F04D4F /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
+		C36402BB18EFFF2A00F04D4F /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		C3E2FC8318EFC30800F61ED2 /* test12_ImageButtonTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test12_ImageButtonTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E2FC8618EFC30800F61ED2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C3E2FC8818EFC30800F61ED2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +129,8 @@
 				C3E2FC9F18EFC30800F61ED2 /* ViewController.m */,
 				C3E2FCA118EFC30800F61ED2 /* Images.xcassets */,
 				C3E2FC8D18EFC30800F61ED2 /* Supporting Files */,
+				C36402BA18EFFF2A00F04D4F /* MyButton.h */,
+				C36402BB18EFFF2A00F04D4F /* MyButton.m */,
 			);
 			path = test12_ImageButtonTest;
 			sourceTree = "<group>";
@@ -129,6 +138,8 @@
 		C3E2FC8D18EFC30800F61ED2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C36402B618EFC56700F04D4F /* img00.jpg */,
+				C36402B718EFC56700F04D4F /* img01.jpg */,
 				C3E2FC8E18EFC30800F61ED2 /* test12_ImageButtonTest-Info.plist */,
 				C3E2FC8F18EFC30800F61ED2 /* InfoPlist.strings */,
 				C3E2FC9218EFC30800F61ED2 /* main.m */,
@@ -231,7 +242,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36402B818EFC56700F04D4F /* img00.jpg in Resources */,
 				C3E2FC9D18EFC30800F61ED2 /* Main_iPad.storyboard in Resources */,
+				C36402B918EFC56700F04D4F /* img01.jpg in Resources */,
 				C3E2FCA218EFC30800F61ED2 /* Images.xcassets in Resources */,
 				C3E2FC9A18EFC30800F61ED2 /* Main_iPhone.storyboard in Resources */,
 				C3E2FC9118EFC30800F61ED2 /* InfoPlist.strings in Resources */,
@@ -256,6 +269,7 @@
 				C3E2FCA018EFC30800F61ED2 /* ViewController.m in Sources */,
 				C3E2FC9718EFC30800F61ED2 /* AppDelegate.m in Sources */,
 				C3E2FC9318EFC30800F61ED2 /* main.m in Sources */,
+				C36402BC18EFFF2A00F04D4F /* MyButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +488,7 @@
 				C3E2FCBA18EFC30900F61ED2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C3E2FCBB18EFC30900F61ED2 /* Build configuration list for PBXNativeTarget "test12_ImageButtonTestTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +497,7 @@
 				C3E2FCBD18EFC30900F61ED2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
