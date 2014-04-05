@@ -13,6 +13,9 @@
 @property UIImage* img01;
 @property int type;
 @property NSTimer *animTimer;
+
+// ボタンのタイプにかかわらず常に非表示にするにはこれをfalseにする。
+@property bool isPemanentlyHidden;
 @end
 
 
@@ -53,9 +56,10 @@
     // ボタン押下コールバック設定
     [self addTarget:self action:@selector(onButton:) forControlEvents:UIControlEventTouchDown];
 
+    _isPemanentlyHidden = false;
 }
 
-#pragma  mark -appearance
+#pragma mark - public method
 - (void)update
 {
     _type = (++_type) % 4;
@@ -75,8 +79,21 @@
         default:
             break;
     }
+    
+    // 常に表示フラグが立っていたら非表示に強制変更
+    if (_isPemanentlyHidden){
+        self.hidden = YES;
+    }
 }
 
+- (void)setPemmanentlyHidden:(bool)isHidden
+{
+    _isPemanentlyHidden = isHidden;
+    self.hidden = isHidden;
+}
+
+
+#pragma  mark - appearance
 - (void)setAppearance00
 {
     // 一旦タイマーをリセット
@@ -114,7 +131,7 @@
 }
 
 
-#pragma mark -AnimationTimer
+#pragma mark - animation timer
 // アニメーション表示のためのタイマー
 - (void)startAnimationTimer
 {
@@ -131,11 +148,13 @@
     }
 }
 
-#pragma mark -button Call Back
+#pragma mark - button Call Back
 - (void)onButton:(UIButton*)button
 {
     NSLog([NSString stringWithFormat:@"Button Clicked!   cur Type = %d", self.type] );
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

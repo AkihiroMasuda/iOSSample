@@ -12,6 +12,8 @@
 @interface ViewController ()
 @property MyButton* button;
 @property UIButton* button2;
+@property UIButton* button3;
+@property bool isButtonHidden;
 @end
 
 @implementation ViewController
@@ -40,8 +42,23 @@
         // コールバック設定
         [btn addTarget:self action:@selector(onButton:) forControlEvents:UIControlEventTouchDown];
     }
+
+    // 画像ボタンを常に非表示にするためのボタン
+    {
+        UIButton *btn =[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        btn.frame = CGRectMake(160, 400, 120, 50);
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn setTitle:@"常に非表示" forState:UIControlStateNormal];
+        [self.view addSubview:btn];
+        _button3 = btn;
+        
+        // コールバック設定
+        [btn addTarget:self action:@selector(onButton:) forControlEvents:UIControlEventTouchDown];
+    }
+    
     
     self.view.backgroundColor = [UIColor lightGrayColor];
+    self.isButtonHidden = false;
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -55,7 +72,14 @@
 // ボタン押下コールバック
 - (void)onButton:(UIButton*)btn
 {
-    [_button update];
+    if (btn == _button2){
+        // ボタン画像を変更
+        [_button update];
+    }else{
+        // ボタンを強制非表示にする
+        self.isButtonHidden = !self.isButtonHidden;
+        [_button setPemmanentlyHidden:self.isButtonHidden];
+    }
 }
 
 

@@ -10,7 +10,10 @@
 
 @interface MyButton : UIButton
 
+// ボタンのタイプを変更し、表示を変える
 - (void)update;
 
+// ボタンのタイプによらず、常に非表示にする
+- (void)setPemmanentlyHidden:(bool)isHidden;
 
 @end
