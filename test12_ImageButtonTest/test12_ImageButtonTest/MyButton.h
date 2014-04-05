@@ -10,7 +10,10 @@
 
 @interface MyButton : UIButton
 
-// ボタンのタイプを変更し、表示を変える
+// 状態を次に進める
+- (void)nextType;
+
+// 今の状態に応じて再描画
 - (void)update;
 
 // ボタンのタイプによらず、常に非表示にする

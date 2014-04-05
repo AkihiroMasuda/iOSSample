@@ -74,7 +74,7 @@
 {
     if (btn == _button2){
         // ボタン画像を変更
-        [_button update];
+        [_button nextType];
     }else{
         // ボタンを強制非表示にする
         self.isButtonHidden = !self.isButtonHidden;

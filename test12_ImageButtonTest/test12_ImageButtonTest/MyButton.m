@@ -50,7 +50,7 @@
     
     // 画像の初期設定
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFill];
-    _type = 0;
+    _type = 1;
     [self update];
     
     // ボタン押下コールバック設定
@@ -60,9 +60,14 @@
 }
 
 #pragma mark - public method
-- (void)update
+- (void)nextType
 {
     _type = (++_type) % 4;
+    [self update];
+}
+
+- (void)update
+{
     switch(_type){
         case 0:
             [self setAppearance00];
@@ -79,7 +84,6 @@
         default:
             break;
     }
-    
     // 常に非表示フラグが立っていたら非表示に強制変更
     if (_isPemanentlyHidden){
         self.hidden = YES;
@@ -89,7 +93,7 @@
 - (void)setPemmanentlyHidden:(bool)isHidden
 {
     _isPemanentlyHidden = isHidden;
-    self.hidden = isHidden;
+    [self update];
 }
 
 
